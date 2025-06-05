@@ -35,11 +35,11 @@ export default function RoomSection() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center py-12">
+      <div className="flex flex-col items-center justify-center py-12 mt-20">
         <p className="text-3xl mb-1">From private to party</p>
-        <p className="mb-6">various room sizes</p>
+        <p className="mb-6 text-lg">various room sizes</p>
 
-        <div className="flex flex-row gap-6">
+        <div className="flex flex-row gap-10">
           {roomData.map((room, index) => (
             <div
               key={index}
@@ -71,6 +71,7 @@ export default function RoomSection() {
             >
               X
             </button>
+            <img src={selectedRoom.img}/>
             <p className="text-2xl font-bold mb-2">{selectedRoom.label}</p>
             <p className="text-lg">{selectedRoom.desc}</p>
           </div>

@@ -49,14 +49,14 @@ export default function YouAndUs() {
   }, [isPaused]);
 
   return (
-    <div className="py-16">
-      <div className="text-center mb-8">
-        <p className="text-5xl font-semibold">ONLY YOU & US</p>
-        <p>It's time for you to be the best.</p>
+    <div className="py-16 mt-20">
+      <div className="text-center mb-14">
+        <p className="text-5xl font-semibold mb-5">ONLY YOU & US</p>
+        <p className="text-lg">It&apos;s time for you to be the best.</p>
       </div>
 
       <div
-        className="overflow-hidden relative group"
+        className="overflow-hidden relative group py-5"
         onMouseEnter={() => !selected && setIsPaused(true)}
         onMouseLeave={() => !selected && setIsPaused(false)}
       >
@@ -107,6 +107,7 @@ export default function YouAndUs() {
             >
               ×
             </button>
+            <img src={selected.src}/>
             <p className="text-2xl font-bold mb-2">{selected.title}</p>
             <p className="text-lg">{selected.desc}</p>
           </div>
