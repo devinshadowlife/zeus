@@ -36,7 +36,7 @@ export default function MenuGallery() {
       </div>
 
       {/* 썸네일 리스트 */}
-      <div className="flex overflow-x-auto overflow-y-hidden whitespace-nowrap gap-4 px-4 scrollbar-thin">
+<div className="flex flex-wrap justify-center gap-4 px-4">
         {imageList.map((img, idx) => (
           <Image
             key={idx}
@@ -46,18 +46,18 @@ export default function MenuGallery() {
             alt={`thumb-${idx}`}
             className={`rounded cursor-pointer inline-block transition-transform duration-300 ${
               idx === currentIndex
-                ? "ring-4 ring-amber-500 scale-105"
+                ? "ring-1 ring-amber-500 scale-105"
                 : "opacity-70 hover:opacity-100"
             }`}
             onClick={() => setCurrentIndex(idx)}
           />
         ))}
       </div>
-      <p className="text-3xl font-bold mb-1">
+      <p className="text-3xl font-bold mb-1 mt-20">
         The Best Chef in Ekkamai, Bangkok
       </p>
-      <p className="mb-4">Korean, Chinese, Japanese and Thai food</p>
-      <p className="mb-6 text-lg text-amber-500 font-semibold">MENU DETAIL</p>
+      <p className="mb-9 text-lg font-semibold">Korean, Chinese, Japanese and Thai food</p>
+      <p className="mb-6 text-2xl text-amber-500 font-semibold">MENU DETAIL</p>
     </div>
   );
 }
