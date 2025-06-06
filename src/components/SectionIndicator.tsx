@@ -42,22 +42,28 @@ export default function SectionIndicator() {
   };
 
   return (
-    <div className="fixed right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">
-      {sections.map((section) => (
-        <button
-          key={section.id}
-          onClick={() => scrollToSection(section.id)}
-          className={`px-3 py-1 rounded-full transition-all duration-300 text-white text-sm font-medium
-            ${
-              currentSection === section.id
-                ? "bg-amber-500 scale-110 font-bold"
-                : "bg-gray-500/50 hover:bg-amber-400"
-            }
-          `}
-        >
-          {section.label}
-        </button>
-      ))}
+    <div className="fixed right-5 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-4">
+      {sections.map((section) => {
+        const isActive = currentSection === section.id;
+
+        return (
+          <button
+            key={section.id}
+            onClick={() => scrollToSection(section.id)}
+            className="flex items-center justify-center"
+          >
+            {isActive ? (
+              // 활성된 섹션: 텍스트만 보여줌, 약간의 투명도 적용
+              <span className="text-white/80 text-sm font-medium">
+                {section.label}
+              </span>
+            ) : (
+              // 비활성 섹션: 가로 막대(bar) 모양, 투명한 흰색
+              <div className="w-8 h-1 bg-white/20 hover:bg-white/40 rounded transition-colors" />
+            )}
+          </button>
+        );
+      })}
     </div>
   );
 }
