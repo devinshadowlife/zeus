@@ -213,9 +213,15 @@ export default function Home() {
           </div>
 
           <div className="relative w-full h-[400px] lg:h-[500px] overflow-hidden my-20">
-            {/* Fixed background image */}
+            {/* 데스크탑 전용: bg-fixed */}
             <div
-              className="absolute inset-0 bg-fixed bg-cover bg-center z-0"
+              className="hidden sm:block absolute inset-0 bg-fixed bg-cover bg-center z-0"
+              style={{ backgroundImage: `url("/images/counter.jpg")` }}
+            />
+
+            {/* 모바일 전용: bg-cover only (fixed 없이 자연스럽게) */}
+            <div
+              className="block sm:hidden absolute inset-0 bg-cover bg-center z-0"
               style={{ backgroundImage: `url("/images/counter.jpg")` }}
             />
 
