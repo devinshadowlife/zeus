@@ -14,7 +14,6 @@ export default function Home() {
   const [fadeOpacity, setFadeOpacity] = useState(1);
   const [aboutVisible, setAboutVisible] = useState(false);
   // 상단
-const [vhHeight, setVhHeight] = useState(0);
 
 const getSafeVh = () => {
   const vh = window.innerHeight * 0.01;
@@ -185,7 +184,7 @@ useEffect(() => {
             </h2>
             <p className="font-lora text-center text-gray-600 max-w-xl mb-10 leading-relaxed">
               Experience an elegant night out at <strong>Zeus Ekkamai</strong> —
-              Bangkok's exclusive destination for premium drinks, private
+              Bangkok&apos;s exclusive destination for premium drinks, private
               karaoke, and refined ambiance.
             </p>
 
@@ -233,7 +232,7 @@ useEffect(() => {
                   <span className="text-amber-400">ZEUS</span>
                 </h3>
                 <p className="font-lora text-gray-200 text-base sm:text-lg leading-relaxed">
-                  Whether you're looking for a private party, premium drinks, or
+                  Whether you&apos;re looking for a private party, premium drinks, or
                   a space to unwind — our doors are open for an unforgettable
                   night in the heart of Bangkok.
                 </p>
