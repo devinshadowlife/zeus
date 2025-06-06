@@ -73,8 +73,12 @@ export default function YouAndUs() {
   return (
     <div className="py-16 mt-20">
       <div className="text-center mb-14">
-        <p className="font-cinzel text-3xl lg:text-5xl font-semibold mb-5">ONLY YOU & US</p>
-        <p className="font-lora lg:text-lg">It&apos;s time for you to be the best.</p>
+        <p className="font-cinzel text-3xl lg:text-5xl font-semibold mb-5">
+          ONLY YOU & US
+        </p>
+        <p className="font-lora text-gray-600 lg:text-lg">
+          It&apos;s time for you to be the best.
+        </p>
       </div>
 
       <div
@@ -82,38 +86,44 @@ export default function YouAndUs() {
         onMouseEnter={() => !selected && setIsPaused(true)}
         onMouseLeave={() => !selected && setIsPaused(false)}
       >
-        <div
-          ref={animationRef}
-          className="
-            flex w-max gap-4
-            animate-slide-slow
-            overflow-x-auto overflow-y-hidden scrollbar-hide
-          "
-        >
-          {[...imageData, ...imageData].map((item, idx) => (
-            <div
-              key={idx}
-              className="
-    relative shrink-0 
-    w-40 h-56
-    lg:w-64 lg:h-80
-    cursor-pointer
-    transition-transform duration-300 hover:-translate-y-2
+       <div
+  ref={animationRef}
+  className="
+    flex w-max gap-4
+    animate-slide-slow
+    overflow-x-auto overflow-y-hidden
+    scrollbar-hide
+    touch-auto         // ✅ 모바일 터치 허용
+    snap-x             // ✅ 가로 스냅 (선택)
+    scroll-smooth      // ✅ 부드럽게 스크롤
   "
-              onClick={() => {
-                setSelected(item);
-                setIsPaused(true);
-              }}
-            >
-              <Image
-                src={item.src}
-                alt={item.title}
-                fill // ⬅️ 이거 쓰면 너가 만든 틀(w/h)에 맞게 꽉 채움
-                className="rounded-lg shadow-lg object-fill" // ⬅️ 비율 무시하고 찌그러져도 틀 꽉 채움
-              />
-            </div>
-          ))}
-        </div>
+>
+  {[...imageData, ...imageData].map((item, idx) => (
+    <div
+      key={idx}
+      className="
+        relative shrink-0 
+        w-40 h-56
+        lg:w-64 lg:h-80
+        cursor-pointer
+        transition-transform duration-300 hover:-translate-y-2
+        snap-start       // ✅ 스냅 위치
+      "
+      onClick={() => {
+        setSelected(item);
+        setIsPaused(true);
+      }}
+    >
+      <Image
+        src={item.src}
+        alt={item.title}
+        fill
+        className="rounded-lg shadow-lg object-fill"
+      />
+    </div>
+  ))}
+</div>
+
       </div>
 
       {/* 디테일 모달 */}
@@ -138,8 +148,18 @@ export default function YouAndUs() {
             >
               ×
             </button>
-
-            <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden">
+            <div
+              className="
+    relative w-full 
+    max-w-full                 // 기본: 제한 없음
+    h-[60vh]                   // 기본 높이: 모바일은 이 정도만
+    sm:h-[70vh]                // 태블릿
+    md:h-[80vh]                // 중간 사이즈
+ lg:h-[60vh]
+    mb-4 rounded-lg overflow-hidden 
+    mx-auto
+  "
+            >
               <Image
                 src={selected.src}
                 alt={selected.title}
@@ -148,7 +168,7 @@ export default function YouAndUs() {
               />
             </div>
 
-            <h2 className="text-2xl font-bold mb-2 text-amber-400">
+            <h2 className="font-cinzel text-2xl font-semibold mb-2 text-amber-400">
               {selected.title}
             </h2>
           </div>

@@ -24,6 +24,21 @@ export default function RoomSection() {
 
   const modalContentRef = useRef<HTMLDivElement>(null);
 
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.3 }
+    );
+
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -61,31 +76,40 @@ export default function RoomSection() {
   return (
     <>
       <div className="flex flex-col items-center justify-center pt-24 pb-20 lg:pt-40 lg:pb-28 mt-20 bg-[#1c1a23]">
-        <p className="font-cinzel text-3xl mb-3 lg:text-6xl lg:mb-5">From private to party</p>
-        <p className="font-lora mb-10 text-xl lg:text-4xl lg:mb-16">various room sizes</p>
+        <p className="font-cinzel text-3xl mb-3 lg:text-6xl lg:mb-5">
+          From private to party
+        </p>
+        <p className="font-lora mb-10 text-xl lg:text-4xl lg:mb-16">
+          various room sizes
+        </p>
 
-        <div className="flex flex-row gap-4 mx-3 lg:gap-16">
-          {roomData.map((room, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
-              onClick={() => {
-                setSelectedRoom(room);
-                setCurrentIdx(0);
-              }}
-            >
-              <Image
-                src={room.images[0]}
-                width={200}
-                height={400}
-                alt={room.label}
-                className="mb-4 lg:mb-8"
-              />
-              <p className="font-lora font-bold lg:text-4xl">{room.label}</p>
-              <p className="font-lora text-sm lg:text-lg">{room.desc}</p>
-            </div>
-          ))}
-        </div>
+        <div
+  ref={containerRef}
+  className="flex flex-row gap-4 mx-3 lg:gap-16"
+>
+  {roomData.map((room, index) => (
+    <div
+      key={index}
+      className={`flex flex-col items-center cursor-pointer transition-transform hover:scale-105 opacity-0
+        ${inView ? `animate-fade-down [animation-delay:${index * 0.2}s]` : ""}`}
+      onClick={() => {
+        setSelectedRoom(room);
+        setCurrentIdx(0);
+      }}
+    >
+      <Image
+        src={room.images[0]}
+        width={200}
+        height={400}
+        alt={room.label}
+        className="mb-4 lg:mb-8"
+      />
+      <p className="font-lora font-bold lg:text-4xl">{room.label}</p>
+      <p className="font-lora text-sm lg:text-lg">{room.desc}</p>
+    </div>
+  ))}
+</div>
+
       </div>
 
       {selectedRoom && (
