@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer utilities {
   @keyframes slide {
@@ -66,4 +68,43 @@
   .animate-fade-up {
     animation: fadeUp 1s ease-out both;
   }
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+@layer utilities {
+  @keyframes glow-red {
+    0%, 100% {
+      /* 시작과 끝에는 약한 그림자 */
+      text-shadow: 0 0 5px rgba(248, 113, 113, 0.8); /* red-500 색상 */
+    }
+    50% {
+      /* 중간에는 더 강한 빛 */
+      text-shadow: 0 0 20px rgba(248, 113, 113, 1);
+    }
+  }
+  .glow-red {
+    animation: glow-red 1.5s ease-in-out infinite;
+  }
+}
+
+/* globals.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* 수평 스크롤 제거 */
+}
+
+/* globals.css 등에 추가 */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;   /* IE, Edge */
+  scrollbar-width: none;      /* Firefox */
 }
