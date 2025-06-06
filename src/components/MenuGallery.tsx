@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const imageList = [
   "/images/Porsche.jpg",
@@ -12,6 +12,23 @@ const imageList = [
 
 export default function MenuGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const textRef = useRef<HTMLDivElement | null>(null);
+const [textInView, setTextInView] = useState(false);
+
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setTextInView(true);
+      }
+    },
+    { threshold: 0.3 }
+  );
+
+  if (textRef.current) observer.observe(textRef.current);
+  return () => observer.disconnect();
+}, []);
+
 
   // 자동 슬라이드
   useEffect(() => {
@@ -58,15 +75,23 @@ export default function MenuGallery() {
         ))}
       </div>
 
-      <p className="font-cinzel text-3xl font-bold mb-1 mt-20">
-        The Best Chef in Ekkamai, Bangkok
-      </p>
-      <p className="font-lora mb-9 text-lg font-semibold">
-        Korean, Chinese, Japanese and Thai food
-      </p>
-      <p className="font-cinzel mb-6 text-2xl text-amber-500 font-semibold">
-        MENU DETAIL
-      </p>
+      <div ref={textRef} className="mt-20">
+  <p
+    className={`font-cinzel text-3xl font-bold mb-1 opacity-0 ${
+      textInView ? "animate-fade-up [animation-delay:0.1s]" : ""
+    }`}
+  >
+    The Best Chef in Ekkamai, Bangkok
+  </p>
+  <p
+    className={`font-lora text-lg font-semibold mb-9 opacity-0 ${
+      textInView ? "animate-fade-up [animation-delay:0.3s]" : ""
+    }`}
+  >
+    Korean, Chinese, Japanese and Thai food
+  </p>
+</div>
+
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RoomSection from "@/components/DetailModal";
 import MenuGallery from "@/components/MenuGallery";
@@ -15,19 +15,41 @@ export default function Home() {
   const [aboutVisible, setAboutVisible] = useState(false);
   // 상단
 
-const getSafeVh = () => {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty("--vh", `${vh}px`);
-};
+  const getSafeVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
 
+  useEffect(() => {
+    getSafeVh();
+    window.addEventListener("resize", getSafeVh);
+    return () => window.removeEventListener("resize", getSafeVh);
+  }, []);
 
-useEffect(() => {
-  getSafeVh();
-  window.addEventListener("resize", getSafeVh);
-  return () => window.removeEventListener("resize", getSafeVh);
-}, []);
+  const aboutRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setAboutVisible(true);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    return () => {
+      if (aboutRef.current) {
+        observer.unobserve(aboutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,49 +121,78 @@ useEffect(() => {
         <div className="absolute bottom-0 w-full h-48 bg-gradient-to-b from-transparent to-black/90 z-10" />
       </div>
 
-<div
-  className="relative z-20 bg-[#000011]"
-  style={{ marginTop: 'calc(var(--vh, 1vh) * 100)' }}
->
-  <div className="absolute -top-32 left-0 w-full h-32 bg-gradient-to-t from-[#000011] to-transparent z-10" />
-  <div className="relative z-20 pt-20">
+      <div
+        className="relative z-20 bg-[#000011]"
+        style={{ marginTop: "calc(var(--vh, 1vh) * 100)" }}
+      >
+        <div className="absolute -top-32 left-0 w-full h-32 bg-gradient-to-t from-[#000011] to-transparent z-10" />
+        <div className="relative z-20 pt-20">
           <div
             id="about"
-            className={`flex flex-row gap-32 items-center justify-center pt-10 transition-opacity duration-1000 ${
-              aboutVisible ? "animate-fade-up opacity-100" : "opacity-0"
-            }`}
+            className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-32 pt-10 px-4"
           >
-            <div className="flex flex-col gap-2">
-              <p className="font-cinzel text-lg lg:text-2xl text-amber-400">
+            {/* 텍스트 영역 */}
+            <div className="flex flex-col gap-3 text-center lg:text-left max-w-md">
+              <p
+                className={`font-cinzel text-lg lg:text-2xl text-yellow-400 tracking-wide opacity-0 ${
+                  aboutVisible ? "animate-fade-up [animation-delay:0.1s]" : ""
+                }`}
+              >
+                {" "}
                 Be GOD with us
               </p>
-              <div className="font-cinzel font-semibold text-center text-2xl lg:text-5xl py-3">
+
+              <div
+                className={`font-cinzel font-bold text-3xl lg:text-5xl text-white drop-shadow-sm opacity-0 ${
+                  aboutVisible ? "animate-fade-up [animation-delay:0.2s]" : ""
+                }`}
+              >
+                {" "}
                 <p>Welcome to</p>
                 <p>ZEUS</p>
               </div>
-              <p className="font-lola text-sm lg:text-lg py-2">
+
+              <p
+                className={`!font-lora text-sm lg:text-lg text-gray-200 py-2 opacity-0 ${
+                  aboutVisible ? "animate-fade-up [animation-delay:0.3s]" : ""
+                }`}
+              >
+                {" "}
                 We are one of the best karaoke & KTV in Bangkok
               </p>
-              <div className="font-lola lg:text-lg gap-1 text-center">
+
+              <div
+                className={`!font-lora text-sm lg:text-lg text-gray-100 space-y-1 opacity-0 ${
+                  aboutVisible ? "animate-fade-up [animation-delay:0.4s]" : ""
+                }`}
+              >
+                {" "}
                 <p>
                   You can do A to{" "}
-                  <span className="text-red-500 glow-red">Z</span>
+                  <span className="text-red-400 font-bold glow-red">Z</span>
                 </p>
                 <p>
                   You are only ON
-                  <span className="text-red-500 glow-red">E</span>
+                  <span className="text-red-400 font-bold glow-red">E</span>
                 </p>
                 <p>
                   You have to be with{" "}
-                  <span className="text-red-500 glow-red">US</span>
+                  <span className="text-red-400 font-bold glow-red">US</span>
                 </p>
               </div>
-              <p className="text-sm lg:text-lg pt-3 text-center">
+
+              <p
+                className={`text-xs lg:text-base pt-3 text-gray-300 font-lora opacity-0 ${
+                  aboutVisible ? "animate-fade-up [animation-delay:0.5s]" : ""
+                }`}
+              >
+                {" "}
                 Ready to support you in everything you do
               </p>
             </div>
 
-            <div className="relative w-[300px] h-[450px]">
+            {/* 이미지 영역 */}
+            <div className="relative w-[250px] h-[370px] lg:w-[300px] lg:h-[450px] rounded-xl shadow-lg overflow-hidden">
               <Image
                 src="/images/Porsche.jpg"
                 fill
@@ -159,6 +210,32 @@ useEffect(() => {
 
           <div id="service">
             <YouAndUs />
+          </div>
+
+          <div className="relative w-full h-[400px] lg:h-[500px] overflow-hidden my-20">
+            {/* Fixed background image */}
+            <div
+              className="absolute inset-0 bg-fixed bg-cover bg-center z-0"
+              style={{ backgroundImage: `url("/images/counter.jpg")` }}
+            />
+
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/80 z-10" />
+
+            {/* Content */}
+            <div className="relative z-20 flex flex-col items-center justify-center h-full px-6 text-center text-white">
+              <p className="text-sm uppercase tracking-widest text-amber-400 mb-2">
+                Premium Experience
+              </p>
+              <h2 className="font-cinzel text-3xl lg:text-5xl font-bold drop-shadow-md">
+                The Finest KTV Experience in Bangkok
+              </h2>
+              <p className="mt-4 font-lora text-gray-300 text-base lg:text-lg max-w-2xl">
+                Luxurious ambiance, tailored services, and a wide selection of
+                premium drinks — all waiting for you at{" "}
+                <span className="text-amber-400 font-semibold">ZEUS</span>.
+              </p>
+            </div>
           </div>
 
           <div id="youtube" className="flex flex-col items-center gap-4 my-20">
@@ -202,9 +279,16 @@ useEffect(() => {
           {/* Bottom Info Section with Background Image */}
           <div className="relative w-full h-auto mt-24 overflow-hidden">
             {/* Fixed background image */}
+            {/* PC용 fixed 배경 */}
             <div
-              className="absolute inset-0 bg-fixed bg-cover bg-center z-0"
-              style={{ backgroundImage: `url("/images/parking.jpg")` }}
+              className="absolute inset-0 bg-cover bg-center hidden sm:block bg-fixed"
+              style={{ backgroundImage: `url('/images/parking.jpg')` }}
+            />
+
+            {/* 모바일용 일반 배경 */}
+            <div
+              className="absolute inset-0 bg-cover bg-center sm:hidden"
+              style={{ backgroundImage: `url('/images/parking.jpg')` }}
             />
 
             {/* Dark overlay */}
@@ -232,9 +316,9 @@ useEffect(() => {
                   <span className="text-amber-400">ZEUS</span>
                 </h3>
                 <p className="font-lora text-gray-200 text-base sm:text-lg leading-relaxed">
-                  Whether you&apos;re looking for a private party, premium drinks, or
-                  a space to unwind — our doors are open for an unforgettable
-                  night in the heart of Bangkok.
+                  Whether you&apos;re looking for a private party, premium
+                  drinks, or a space to unwind — our doors are open for an
+                  unforgettable night in the heart of Bangkok.
                 </p>
                 <div className="font-lora text-gray-100 text-sm sm:text-base font-light space-y-1 pt-2">
                   <p>
