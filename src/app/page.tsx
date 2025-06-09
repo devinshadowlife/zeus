@@ -97,6 +97,7 @@ export default function Home() {
           "
         loop
         playsInline
+        poster="/images/cover.png"
       />
 
       <div className="fixed top-0 left-0 w-full h-screen z-20 flex flex-col items-center justify-center text-white text-center pointer-events-none">
