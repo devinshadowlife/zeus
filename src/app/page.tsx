@@ -272,27 +272,33 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-4 mb-20 mt-28">
-            <p className="font-cinzel text-3xl">Youtube & TikTok</p>
-            <div className="flex flex-col lg:flex-row gap-4 lg:gap-5 mt-2">
-              <a
-                href="https://www.youtube.com/@zeusekkamaiktv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="uppercase text-sm lg:text-lg tracking-widest border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100 hover:text-gray-800 transition text-center"
-              >
-                Youtube Link
-              </a>
-              <a
-                href="https://www.tiktok.com/@zeus.ekkamai.ktv?_t=ZS-8wziE6KcLKM&_r=1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="uppercase text-sm lg:text-lg tracking-widest border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100 hover:text-gray-800 transition text-center"
-              >
-                TikTok Link
-              </a>
-            </div>
-          </div>
+          <div id="youtube" className="flex flex-col items-center gap-4 mb-20 mt-28 px-4">
+  <p className="font-cinzel text-3xl text-center">
+    the Private World of <span className="font-semibold">ZEUS</span>
+  </p>
+  <p className="font-lora text-gray-500 text-center text-sm sm:text-base max-w-2xl">
+    Discover the exclusive ambiance of our private lounges, luxury suites, and unforgettable nights — only on our official channels.
+  </p>
+  <div className="flex flex-col lg:flex-row gap-4 lg:gap-5 mt-4">
+    <a
+      href="https://www.youtube.com/@zeusekkamaiktv"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="uppercase text-sm lg:text-lg tracking-widest border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100 hover:text-gray-800 transition text-center"
+    >
+      Youtube Link
+    </a>
+    <a
+      href="https://www.tiktok.com/@zeus.ekkamai.ktv?_t=ZS-8wziE6KcLKM&_r=1"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="uppercase text-sm lg:text-lg tracking-widest border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100 hover:text-gray-800 transition text-center"
+    >
+      TikTok Link
+    </a>
+  </div>
+</div>
+
 
           <div id="menu">
             <MenuGallery />
