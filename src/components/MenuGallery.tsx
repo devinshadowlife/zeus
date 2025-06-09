@@ -81,7 +81,7 @@ useEffect(() => {
       textInView ? "animate-fade-up [animation-delay:0.1s]" : ""
     }`}
   >
-    The Best Chef in Ekkamai, Bangkok
+    The Best Chef<br/> in Ekkamai, Bangkok
   </p>
   <p
     className={`font-lora text-lg font-semibold mb-9 opacity-0 ${

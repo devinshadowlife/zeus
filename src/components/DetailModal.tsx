@@ -83,33 +83,31 @@ export default function RoomSection() {
           various room sizes
         </p>
 
-        <div
-  ref={containerRef}
-  className="flex flex-row gap-4 mx-3 lg:gap-16"
->
-  {roomData.map((room, index) => (
-    <div
-      key={index}
-      className={`flex flex-col items-center cursor-pointer transition-transform hover:scale-105 opacity-0
+        <div ref={containerRef} className="flex flex-row gap-4 mx-3 lg:gap-16">
+          {roomData.map((room, index) => (
+            <div
+              key={index}
+              className={`flex flex-col items-center cursor-pointer transition-transform hover:scale-105 opacity-0
         ${inView ? `animate-fade-down [animation-delay:${index * 0.2}s]` : ""}`}
-      onClick={() => {
-        setSelectedRoom(room);
-        setCurrentIdx(0);
-      }}
-    >
-      <Image
-        src={room.images[0]}
-        width={200}
-        height={400}
-        alt={room.label}
-        className="mb-4 lg:mb-8"
-      />
-      <p className="font-lora font-bold lg:text-4xl">{room.label}</p>
-      <p className="font-lora text-sm lg:text-lg">{room.desc}</p>
-    </div>
-  ))}
-</div>
-
+              onClick={() => {
+                setSelectedRoom(room);
+                setCurrentIdx(0);
+              }}
+            >
+              <Image
+                src={room.images[0]}
+                width={200}
+                height={400}
+                alt={room.label}
+                className="mb-4 lg:mb-8"
+              />
+              <p className="font-lora font-bold lg:text-4xl">{room.label}</p>
+              <p className="font-lora mt-2 lg:mt-5 text-sm lg:text-lg px-3 py-1 border border-white/30 rounded-full hover:bg-white/10 transition">
+                {room.desc}
+              </p>{" "}
+            </div>
+          ))}
+        </div>
       </div>
 
       {selectedRoom && (

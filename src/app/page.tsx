@@ -9,11 +9,14 @@ import SectionIndicator from "@/components/SectionIndicator";
 import MessengerButton from "@/components/MessengerButton";
 import Header from "@/components/Header";
 import MenuDetail from "@/components/MenuDetail";
+import ContactCard from "@/components/ContactCard";
 
 export default function Home() {
   const [fadeOpacity, setFadeOpacity] = useState(1);
   const [aboutVisible, setAboutVisible] = useState(false);
-  
+  const [visitVisible, setVisitVisible] = useState(false);
+  const visitRef = useRef<HTMLDivElement | null>(null);
+
   // 상단
 
   const getSafeVh = () => {
@@ -49,6 +52,22 @@ export default function Home() {
       if (aboutRef.current) {
         observer.unobserve(aboutRef.current);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisitVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (visitRef.current) observer.observe(visitRef.current);
+    return () => {
+      if (visitRef.current) observer.unobserve(visitRef.current);
     };
   }, []);
 
@@ -113,10 +132,10 @@ export default function Home() {
             height={50}
             className="mx-auto w-[240px] sm:w-[280px] md:w-[320px] lg:w-[450px] h-auto"
           />{" "}
-          <p className="font-cinzel mb-3 mt-10 text-4xl lg:text-6xl font-bold drop-shadow-lg">
+          <p className="font-cinzel mb-3 mt-10 text-4xl lg:text-6xl font-bold drop-shadow-lg text-white/70">
             BE GOD
           </p>
-          <p className="font-cinzel text-4xl lg:text-6xl font-bold drop-shadow-lg">
+          <p className="font-cinzel text-4xl lg:text-6xl font-bold drop-shadow-lg text-white/70">
             YOU ARE ZEUS
           </p>
         </div>
@@ -151,7 +170,7 @@ export default function Home() {
               >
                 {" "}
                 <p>Welcome to</p>
-                <p>ZEUS</p>
+                <span className="text-5xl lg:text-8xl">ZEUS</span>
               </div>
 
               <p
@@ -164,23 +183,30 @@ export default function Home() {
               </p>
 
               <div
-                className={`!font-lora text-sm lg:text-lg text-gray-100 space-y-1 opacity-0 ${
+                className={`px-20 !font-lora text-sm lg:text-lg text-gray-100 space-y-1 opacity-0 ${
                   aboutVisible ? "animate-fade-up [animation-delay:0.4s]" : ""
                 }`}
               >
-                {" "}
-                <p>
-                  You can do A to{" "}
-                  <span className="text-red-400 font-bold glow-red">Z</span>
-                </p>
-                <p>
-                  You are only ON
-                  <span className="text-red-400 font-bold glow-red">E</span>
-                </p>
-                <p>
-                  You have to be with{" "}
-                  <span className="text-red-400 font-bold glow-red">US</span>
-                </p>
+                <div className="flex items-center">
+                  <p className="flex-1 whitespace-nowrap">You can do A to</p>
+                  <span className="inline-block w-6 text-red-400 font-bold glow-red text-center">
+                    Z
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <p className="flex-1 whitespace-nowrap">You are only ON</p>
+                  <span className="inline-block w-6 text-red-400 font-bold glow-red text-center">
+                    E
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <p className="flex-1 whitespace-nowrap">
+                    You have to be with
+                  </p>
+                  <span className="inline-block w-4 text-red-400 font-bold glow-red text-center">
+                    US
+                  </span>
+                </div>
               </div>
 
               <p
@@ -246,11 +272,25 @@ export default function Home() {
             </div>
           </div>
 
-          <div id="youtube" className="flex flex-col items-center gap-4 my-20">
+          <div className="flex flex-col items-center gap-4 mb-20 mt-28">
             <p className="font-cinzel text-3xl">Youtube & TikTok</p>
-            <div className="flex flex-row gap-5">
-              <p className="text-xl">Youtube Link</p>
-              <p className="text-xl">TikTok Link</p>
+            <div className="flex flex-col lg:flex-row gap-4 lg:gap-5 mt-2">
+              <a
+                href="https://www.youtube.com/@zeusekkamaiktv"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="uppercase text-sm lg:text-lg tracking-widest border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100 hover:text-gray-800 transition text-center"
+              >
+                Youtube Link
+              </a>
+              <a
+                href="https://www.tiktok.com/@zeus.ekkamai.ktv?_t=ZS-8wziE6KcLKM&_r=1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="uppercase text-sm lg:text-lg tracking-widest border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100 hover:text-gray-800 transition text-center"
+              >
+                TikTok Link
+              </a>
             </div>
           </div>
 
@@ -273,7 +313,7 @@ export default function Home() {
               karaoke, and refined ambiance.
             </p>
 
-            <div className="w-full max-w-6xl aspect-video rounded-md overflow-hidden border border-gray-300 shadow-md">
+            <div className="w-full max-w-6xl aspect-video rounded-md overflow-hidden border border-gray-300 shadow-md mb-4">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1937.9002112869025!2d100.58624432319237!3d13.730529652408523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17!3m3!1m2!1s0x30e29f001b8f0779%3A0x6e41709ae71870a6!2sZeus%20Ekkamai%20ktv%20karaoke!5e0!3m2!1sen!2skr!4v1749106739132!5m2!1sen!2skr"
                 className="w-full h-full"
@@ -282,6 +322,15 @@ export default function Home() {
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
+
+            <a
+              href="https://maps.app.goo.gl/HrFH6Gv2CKj3i1WU6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="uppercase text-xs tracking-widest border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100 transition hover:text-gray-800 font-medium mt-5 lg:mt-10"
+            >
+              Open in Google Maps
+            </a>
           </div>
 
           {/* Bottom Info Section with Background Image */}
@@ -310,36 +359,75 @@ export default function Home() {
                   src="/images/logo.png"
                   alt="Zeus Logo"
                   fill
-                  className="object-contain"
+                  className="object-contain lg:hidden"
                 />
               </div>
 
               {/* Info Text on the right */}
-              <div className="text-center lg:text-left max-w-2xl space-y-4">
-                <p className="text-sm uppercase tracking-widest text-amber-400">
+              <div
+                ref={visitRef}
+                className="text-center lg:text-left max-w-2xl space-y-4"
+              >
+                <p
+                  className={`text-sm uppercase tracking-widest text-amber-400 opacity-0 ${
+                    visitVisible
+                      ? "animate-fade-down [animation-delay:.1s]"
+                      : ""
+                  }`}
+                >
                   Visit Us
                 </p>
-                <h3 className="font-cinzel text-3xl sm:text-4xl font-bold drop-shadow-md">
+                <h3
+                  className={`font-cinzel text-3xl sm:text-4xl font-bold drop-shadow-md opacity-0 ${
+                    visitVisible
+                      ? "animate-fade-down [animation-delay:.3s]"
+                      : ""
+                  }`}
+                >
                   Your Night Begins at{" "}
                   <span className="text-amber-400">ZEUS</span>
                 </h3>
-                <p className="font-lora text-gray-200 text-base sm:text-lg leading-relaxed">
+                <p
+                  className={`font-lora text-gray-200 text-base sm:text-lg leading-relaxed opacity-0 ${
+                    visitVisible
+                      ? "animate-fade-down [animation-delay:.5s]"
+                      : ""
+                  }`}
+                >
                   Whether you&apos;re looking for a private party, premium
                   drinks, or a space to unwind — our doors are open for an
                   unforgettable night in the heart of Bangkok.
                 </p>
                 <div className="font-lora text-gray-100 text-sm sm:text-base font-light space-y-1 pt-2">
-                  <p>
+                  <p
+                    className={`opacity-0 ${
+                      visitVisible
+                        ? "animate-fade-down [animation-delay:.7s]"
+                        : ""
+                    }`}
+                  >
                     <span className="font-semibold">Address:</span> 23/1 Ekkamai
                     12 Alley, Khlong Tan Nuea,
                     <br />
                     Watthana, Bangkok 10110
                   </p>
-                  <p>
+                  <p
+                    className={`opacity-0 ${
+                      visitVisible
+                        ? "animate-fade-down [animation-delay:.9s]"
+                        : ""
+                    }`}
+                  >
                     <span className="font-semibold">Hours:</span> 8 PM – 4 AM
                     (Open Daily)
                   </p>
-                  <p>
+                  <p
+                    className={`opacity-0 ${
+                      visitVisible
+                        ? "animate-fade-down [animation-delay:1.1s]"
+                        : ""
+                    }`}
+                  >
                     <span className="font-semibold">Phone:</span>{" "}
                     <a
                       href="tel:+66612130971"
@@ -350,6 +438,8 @@ export default function Home() {
                   </p>
                 </div>
               </div>
+
+              <ContactCard />
             </div>
 
             {/* Scroll to top button */}

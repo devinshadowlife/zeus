@@ -1,30 +1,47 @@
 "use client";
 
 import { useState } from "react";
-import { FaCommentDots, FaInstagram, FaLine } from "react-icons/fa";
-import { SiKakaotalk } from "react-icons/si";
+import { FaCommentDots, FaLine, FaWhatsapp, FaTelegramPlane } from "react-icons/fa";
+import { SiKakaotalk, SiWechat } from "react-icons/si";
 
 export default function MessengerButton() {
   const [open, setOpen] = useState(false);
 
   const buttons = [
     {
-      icon: <SiKakaotalk className="text-black w-5 h-5" />,
-      bg: "bg-yellow-400",
-      title: "KakaoTalk",
-      delay: "delay-100",
-    },
-    {
       icon: <FaLine className="text-white w-5 h-5" />,
       bg: "bg-green-500",
       title: "LINE",
-      delay: "delay-200",
+      delay: "delay-100",
+      href: "https://line.me/ti/p/zeus_ekkamai", // 친구 추가용
     },
     {
-      icon: <FaInstagram className="text-white w-5 h-5" />,
-      bg: "bg-pink-500",
-      title: "Instagram",
+      icon: <SiWechat className="text-white w-5 h-5" />,
+      bg: "bg-green-600",
+      title: "WeChat",
+      delay: "delay-150",
+      href: "weixin://dl/chat?zeus_ekkamai", // 위챗은 브라우저에서 안 열릴 수 있음
+    },
+    {
+      icon: <FaWhatsapp className="text-white w-5 h-5" />,
+      bg: "bg-emerald-500",
+      title: "WhatsApp",
+      delay: "delay-200",
+      href: "https://wa.me/zeus_ekkamai", // 전화번호 형식 필요할 수 있음
+    },
+    {
+      icon: <SiKakaotalk className="text-black w-5 h-5" />,
+      bg: "bg-yellow-400",
+      title: "KakaoTalk",
+      delay: "delay-250",
+      href: "https://pf.kakao.com/_xeAxkxb/chat", // 카카오 채널 또는 아이디에 따라 다름
+    },
+    {
+      icon: <FaTelegramPlane className="text-white w-5 h-5" />,
+      bg: "bg-blue-500",
+      title: "Telegram",
       delay: "delay-300",
+      href: "https://t.me/zeusekkamai",
     },
   ];
 
@@ -34,7 +51,9 @@ export default function MessengerButton() {
         {buttons.map((btn, i) => (
           <a
             key={i}
-            href="#"
+            href={btn.href}
+            target="_blank"
+            rel="noopener noreferrer"
             title={btn.title}
             className={`
               ${btn.bg} p-2 rounded-full shadow-lg transform transition-all duration-300

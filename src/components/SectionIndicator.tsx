@@ -50,17 +50,13 @@ export default function SectionIndicator() {
           <button
             key={section.id}
             onClick={() => scrollToSection(section.id)}
-            className="flex items-center justify-center"
+            className={`transition-all duration-300 ${
+              isActive
+                ? "text-white text-lg font-bold drop-shadow-[0_0_6px_rgba(255,255,255,0.8)]"
+                : "text-white/50 text-sm hover:text-white"
+            }`}
           >
-            {isActive ? (
-              // 활성된 섹션: 텍스트만 보여줌, 약간의 투명도 적용
-              <span className="text-white/80 text-sm font-medium">
-                {section.label}
-              </span>
-            ) : (
-              // 비활성 섹션: 가로 막대(bar) 모양, 투명한 흰색
-              <div className="w-8 h-1 bg-white/20 hover:bg-white/40 rounded transition-colors" />
-            )}
+            {section.label}
           </button>
         );
       })}
