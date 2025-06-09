@@ -13,7 +13,13 @@ import MenuDetail from "@/components/MenuDetail";
 export default function Home() {
   const [fadeOpacity, setFadeOpacity] = useState(1);
   const [aboutVisible, setAboutVisible] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
   // 상단
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const getSafeVh = () => {
     const vh = window.innerHeight * 0.01;
@@ -21,10 +27,11 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (!isClient) return;
     getSafeVh();
     window.addEventListener("resize", getSafeVh);
     return () => window.removeEventListener("resize", getSafeVh);
-  }, []);
+  }, [isClient]);
 
   const aboutRef = useRef<HTMLDivElement | null>(null);
 
@@ -84,21 +91,25 @@ export default function Home() {
   return (
     <>
       <Header />
-      <video
-        src="/videos/hero_video.mp4"
-        muted
-        autoPlay
-        className="
+      {isClient && (
+        <video
+          muted
+          autoPlay
+          className="
             fixed
             inset-0
             w-full
             h-full
             object-cover
           "
-        loop
-        playsInline
-        poster="/images/cover.png"
-      />
+          loop
+          playsInline
+          poster="/images/cover.png"
+        >
+          <source src="/videos/hero_video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
 
       <div className="fixed top-0 left-0 w-full h-screen z-20 flex flex-col items-center justify-center text-white text-center pointer-events-none">
         <div
