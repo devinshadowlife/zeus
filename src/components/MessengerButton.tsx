@@ -13,7 +13,7 @@ export default function MessengerButton() {
       bg: "bg-green-500",
       title: "LINE",
       delay: "delay-100",
-      href: "https://line.me/ti/p/zeus_ekkamai", // 친구 추가용
+      href: "https://line.me/ti/p/@zeus_ekkamai", // 친구 추가용
     },
     {
       icon: <SiWechat className="text-white w-5 h-5" />,
