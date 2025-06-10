@@ -16,7 +16,6 @@ import kr from "@/lib/locales/kr.json";
 import cn from "@/lib/locales/cn.json";
 import th from "@/lib/locales/th.json";
 
-
 // Define translation type
 interface Translation {
   slogan: string;
@@ -33,8 +32,6 @@ interface Translation {
   roomSizes: string;
   beTheBest: string;
 }
-
-
 
 const translations: Record<string, Translation> = {
   en: {
@@ -66,9 +63,6 @@ const translations: Record<string, Translation> = {
     },
   },
 };
-
-
-
 
 export default function HomeClient() {
   const [fadeOpacity, setFadeOpacity] = useState(1);
@@ -214,7 +208,7 @@ export default function HomeClient() {
           <div
             id="about"
             ref={aboutRef}
-            className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-32 pt-10 px-4"
+            className="flex flex-col lg:flex-row items-center justify-center gap-10 pt-10 px-4"
           >
             {/* Text Section */}
             <div className="flex flex-col gap-3 text-center lg:text-left max-w-md">
@@ -276,14 +270,36 @@ export default function HomeClient() {
             </div>
 
             {/* Image Section */}
-            <div className="relative w-[250px] h-[370px] lg:w-[300px] lg:h-[450px] rounded-xl shadow-lg overflow-hidden">
-              <Image
-                src="/images/Porsche.jpg"
-                fill
-                alt="ZEUS Karaoke Ekkamai Experience"
-                className="object-cover"
-              />
-            </div>
+            <div className="relative w-[85%] lg:w-[45%] aspect-[16/9] rounded-xl shadow-lg overflow-hidden">
+  <Image
+    src="/images/parking.jpg"
+    fill
+    alt="ZEUS Karaoke Ekkamai Experience"
+    className="object-cover"
+  />
+
+  {/* 강하게 보이는 긴 타원형 액자 그라데이션 */}
+   {/* 강하고 부드러운 긴 타원형 액자 그라데이션 */}
+<div className="absolute inset-0 pointer-events-none z-10">
+  <div
+    className="w-full h-full"
+    style={{
+      background: `radial-gradient(
+        ellipse 100% 75% at center,
+        rgba(0,0,17,0) 30%,
+        rgba(0,0,17,0.5) 40%,
+        rgba(0,0,17,1) 60%,
+        rgba(0,0,17,1) 70%,
+        rgba(0,0,17,1) 80%,
+        rgba(0,0,17,1) 90%,
+        rgba(0,0,17,1) 100%
+      )`,
+    }}
+  />
+</div>
+
+</div>
+
           </div>
 
           <div id="room">
@@ -390,7 +406,10 @@ export default function HomeClient() {
           </div>
 
           {/* Contact Section */}
-          <div id="contact" className="relative w-full h-auto mt-24 overflow-hidden">
+          <div
+            id="contact"
+            className="relative w-full h-auto mt-24 overflow-hidden"
+          >
             {/* Desktop: Ellipse Mask */}
             <div className="hidden sm:block absolute inset-0 z-0">
               <div
@@ -424,21 +443,28 @@ export default function HomeClient() {
               >
                 <p
                   className={`text-sm uppercase tracking-widest text-amber-400 opacity-0 ${
-                    visitVisible ? "animate-fade-down [animation-delay:.1s]" : ""
+                    visitVisible
+                      ? "animate-fade-down [animation-delay:.1s]"
+                      : ""
                   }`}
                 >
                   Visit Us
                 </p>
                 <h3
                   className={`font-cinzel text-3xl sm:text-4xl font-bold drop-shadow-md opacity-0 ${
-                    visitVisible ? "animate-fade-down [animation-delay:.3s]" : ""
+                    visitVisible
+                      ? "animate-fade-down [animation-delay:.3s]"
+                      : ""
                   }`}
                 >
-                  Your Night Begins at <span className="text-amber-400">ZEUS</span>
+                  Your Night Begins at{" "}
+                  <span className="text-amber-400">ZEUS</span>
                 </h3>
                 <p
                   className={`font-lora text-gray-200 text-base sm:text-lg leading-relaxed opacity-0 ${
-                    visitVisible ? "animate-fade-down [animation-delay:.5s]" : ""
+                    visitVisible
+                      ? "animate-fade-down [animation-delay:.5s]"
+                      : ""
                   }`}
                 >
                   {t.visit}
@@ -446,23 +472,31 @@ export default function HomeClient() {
                 <div className="font-lora text-gray-100 text-sm sm:text-base font-light space-y-1 pt-2">
                   <p
                     className={`opacity-0 ${
-                      visitVisible ? "animate-fade-down [animation-delay:.7s]" : ""
+                      visitVisible
+                        ? "animate-fade-down [animation-delay:.7s]"
+                        : ""
                     }`}
                   >
-                    <span className="font-semibold">Address:</span> 23/1 Ekkamai 12 Alley, Khlong Tan Nuea,
+                    <span className="font-semibold">Address:</span> 23/1 Ekkamai
+                    12 Alley, Khlong Tan Nuea,
                     <br />
                     Watthana, Bangkok 10110
                   </p>
                   <p
                     className={`opacity-0 ${
-                      visitVisible ? "animate-fade-down [animation-delay:.9s]" : ""
+                      visitVisible
+                        ? "animate-fade-down [animation-delay:.9s]"
+                        : ""
                     }`}
                   >
-                    <span className="font-semibold">Hours:</span> 8 PM – 4 AM (Open Daily)
+                    <span className="font-semibold">Hours:</span> 8 PM – 4 AM
+                    (Open Daily)
                   </p>
                   <p
                     className={`opacity-0 ${
-                      visitVisible ? "animate-fade-down [animation-delay:1.1s]" : ""
+                      visitVisible
+                        ? "animate-fade-down [animation-delay:1.1s]"
+                        : ""
                     }`}
                   >
                     <span className="font-semibold">Phone:</span>{" "}
