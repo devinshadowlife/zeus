@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
-    const { locale } = useParams() as { locale: string };
       const router = useRouter();
 
 

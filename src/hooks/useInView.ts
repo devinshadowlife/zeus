@@ -1,4 +1,3 @@
-// hooks/useInView.ts
 import { useEffect, useRef, useState } from "react";
 
 export default function useInView(threshold = 0) {
@@ -6,19 +5,23 @@ export default function useInView(threshold = 0) {
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsInView(true);
-      },
-      { threshold }
-    );
+    const element = ref.current; // Copy ref value
+    if (element) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setIsInView(true);
+        },
+        { threshold }
+      );
+      observer.observe(element);
 
-    if (ref.current) observer.observe(ref.current);
-
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
-  }, [threshold]);
+      return () => {
+        if (element) {
+          observer.unobserve(element); // Use copied value
+        }
+      };
+    }
+  }, [threshold]); // Dependency array includes threshold
 
   return { ref, isInView };
 }

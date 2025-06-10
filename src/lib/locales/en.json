@@ -1,15 +1,14 @@
 {
   "slogan": "We are the best karaoke & KTV in Bangkok",
   "support": "Ready to support you in everything you do",
-  "luxury": "Luxurious ambiance, tailored services, and a wide selection of premium drinks — all waiting for you at ZEUS.",
+  "luxury.prefix": "Luxurious ambiance, tailored services, and a wide selection of premium drinks — all waiting for you at ",
+  "luxury.suffix": ".",
   "discover": "Discover the exclusive ambiance of our private lounges, luxury suites, and unforgettable nights — only on our official channels.",
   "experience": "Experience an elegant night out at <strong>ZEUS Ekkamai</strong> — Bangkok's exclusive destination for premium drinks, private karaoke, and refined ambiance.",
   "visit": "Whether you're looking for a private party, premium drinks, or a space to unwind — our doors are open for an unforgettable night in the heart of Bangkok.",
-  "menu":"Korean, Chinese, Japanese and Thai food",
+  "menu": "Korean, Chinese, Japanese and Thai food",
   "liquorPromo": "Discover an exquisite range of premium liquors, thoughtfully offered at <span class=\"font-semibold text-amber-600\">fair and accessible prices</span>. Let our elegant KTV setting elevate your night to something truly memorable.",
   "roomSizes": "various room sizes",
 
-"beTheBest": "It's time for you to be the best."
-
-
+  "beTheBest": "It's time for you to be the best."
 }

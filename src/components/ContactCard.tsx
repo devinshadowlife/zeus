@@ -9,17 +9,23 @@ export default function ContactCard() {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setInView(true);
-      },
-      { threshold: 0.2 }
-    );
-    if (cardRef.current) observer.observe(cardRef.current);
-    return () => {
-      if (cardRef.current) observer.unobserve(cardRef.current);
-    };
-  }, []);
+    const card = cardRef.current; // Copy ref value
+    if (card) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setInView(true);
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(card);
+
+      return () => {
+        if (card) {
+          observer.unobserve(card); // Use copied value in cleanup
+        }
+      };
+    }
+  }, []); // Empty deps since this runs once on mount
 
   const buttons = [
     {
