@@ -16,23 +16,38 @@ const MenuDetail = () => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const detailRef = useRef<HTMLDivElement | null>(null);
   const mobileDetailRef = useRef<HTMLDivElement | null>(null); // 모바일용
+  const imageRef = useRef<HTMLDivElement | null>(null);
 
   const [inView, setInView] = useState(false);
 
- useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) setInView(true);
-    },
-    { threshold: 0.3 }
-  );
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.3 }
+    );
 
-  if (detailRef.current) observer.observe(detailRef.current);
-  if (mobileDetailRef.current) observer.observe(mobileDetailRef.current);
+    if (detailRef.current) observer.observe(detailRef.current);
+    if (mobileDetailRef.current) observer.observe(mobileDetailRef.current);
 
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (imageRef.current) observer.observe(imageRef.current);
+    return () => {
+      if (imageRef.current) observer.unobserve(imageRef.current);
+    };
+  }, []);
 
   const handleOpen = (idx: number) => {
     setCurrentIdx(idx);
@@ -55,9 +70,24 @@ const MenuDetail = () => {
 
   return (
     <div className="flex flex-col items-center justify-center px-4 py-16 lg:pt-20 gap-8 bg-[#1c1a23]">
-       <div className="mt-20 text-center">
+      <div
+      ref={imageRef}
+      className={`relative w-full h-[300px] lg:h-[400px] max-w-4xl overflow-hidden rounded-lg shadow-lg opacity-0 ${
+        inView ? "animate-fade-down" : ""
+      }`}
+    >
+      <Image
+        src="/images/table.png"
+        fill
+        alt="table"
+        className="object-cover w-full"
+      />
+    </div>
+      <div className="mt-20 text-center">
         <p className="font-cinzel text-3xl font-bold mb-1 animate-fade-up">
-          The Best Chef<br />in Ekkamai, Bangkok
+          The Best Chef
+          <br />
+          in Ekkamai, Bangkok
         </p>
         <p className="font-lora text-lg font-semibold mb-9 animate-fade-up [animation-delay:0.3s]">
           Korean, Chinese, Japanese and Thai food
@@ -80,52 +110,51 @@ const MenuDetail = () => {
       </div>
 
       <div
-  ref={mobileDetailRef}
-  className="flex flex-col w-full items-center lg:hidden gap-6"
->
-  <Image
-    src={imageList[0]}
-    width={500}
-    height={600}
-    alt="main image"
-    className={`rounded-lg shadow cursor-pointer w-full max-w-md object-cover opacity-0 ${
-      inView ? "animate-fade-right [animation-delay:0.1s]" : ""
-    }`}
-    onClick={() => handleOpen(0)}
-  />
-
-  <p
-    className={`font-lora text-gray-600 text-center text-lg lg:text-2xl font-semibold opacity-0 ${
-      inView ? "animate-fade-up [animation-delay:0.3s]" : ""
-    }`}
-  >
-    MORE DETAIL
-  </p>
-
-  <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-    {imageList.slice(1, 5).map((src, idx) => (
-      <div
-        key={src}
-        className={`relative w-full h-[200px] opacity-0 ${
-          inView
-            ? idx % 2 === 0
-              ? `animate-fade-right [animation-delay:${0.4 + idx * 0.2}s]`
-              : `animate-fade-left [animation-delay:${0.4 + idx * 0.2}s]`
-            : ""
-        }`}
+        ref={mobileDetailRef}
+        className="flex flex-col w-full items-center lg:hidden gap-6"
       >
         <Image
-          src={src}
-          alt={`detail image ${idx + 2}`}
-          fill
-          className="object-cover rounded-lg shadow cursor-pointer"
-          onClick={() => handleOpen(idx + 1)}
+          src={imageList[0]}
+          width={500}
+          height={600}
+          alt="main image"
+          className={`rounded-lg shadow cursor-pointer w-full max-w-md object-cover opacity-0 ${
+            inView ? "animate-fade-right [animation-delay:0.1s]" : ""
+          }`}
+          onClick={() => handleOpen(0)}
         />
-      </div>
-    ))}
-  </div>
-</div>
 
+        <p
+          className={`font-lora text-gray-600 text-center text-lg lg:text-2xl font-semibold opacity-0 ${
+            inView ? "animate-fade-up [animation-delay:0.3s]" : ""
+          }`}
+        >
+          MORE DETAIL
+        </p>
+
+        <div className="grid grid-cols-2 gap-4 w-full max-w-md">
+          {imageList.slice(1, 5).map((src, idx) => (
+            <div
+              key={src}
+              className={`relative w-full h-[200px] opacity-0 ${
+                inView
+                  ? idx % 2 === 0
+                    ? `animate-fade-right [animation-delay:${0.4 + idx * 0.2}s]`
+                    : `animate-fade-left [animation-delay:${0.4 + idx * 0.2}s]`
+                  : ""
+              }`}
+            >
+              <Image
+                src={src}
+                alt={`detail image ${idx + 2}`}
+                fill
+                className="object-cover rounded-lg shadow cursor-pointer"
+                onClick={() => handleOpen(idx + 1)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* 데스크탑 전용 layout */}
       <div className="hidden lg:flex flex-row gap-10">
