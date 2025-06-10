@@ -11,6 +11,7 @@ export default function Header() {
           src="/images/logo.png"
           fill
           className="object-contain"
+            sizes="(max-width: 768px) 150px, 280px"
           alt="logo"
         />
       </div>

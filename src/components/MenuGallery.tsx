@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const videoList = [
@@ -89,15 +90,18 @@ export default function MenuGallery() {
           >
             <video
               src={video.src}
+              preload="none"
               muted
               playsInline
               className="hidden sm:block rounded-lg object-cover w-full h-full group-hover:ring-2 group-hover:ring-amber-500 transition"
             />
 
             {/* Mobile에서는 대체 이미지 (예: number1.jpg, number2.jpg...) */}
-            <img
-              src={`/images/videoThumb${idx + 1}.png`} // 이미지 파일명: videoThumb1~6
+            <Image
+              src={`/images/videoThumb${idx + 1}.png`}
               alt={`Video ${idx + 1}`}
+              width={200}
+              height={270}
               className="block sm:hidden w-full h-full object-cover rounded-lg shadow"
             />
           </a>
