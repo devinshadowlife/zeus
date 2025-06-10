@@ -55,6 +55,14 @@ const MenuDetail = () => {
 
   return (
     <div className="flex flex-col items-center justify-center px-4 py-16 lg:pt-20 gap-8 bg-[#1c1a23]">
+       <div className="mt-20 text-center">
+        <p className="font-cinzel text-3xl font-bold mb-1 animate-fade-up">
+          The Best Chef<br />in Ekkamai, Bangkok
+        </p>
+        <p className="font-lora text-lg font-semibold mb-9 animate-fade-up [animation-delay:0.3s]">
+          Korean, Chinese, Japanese and Thai food
+        </p>
+      </div>
       {/* 모바일 전용 layout */}
       <div className="mt-10 lg:mt-20">
         <p className="font-cinzel text-center mb-6 text-3xl text-amber-500 font-semibold lg:text-5xl">

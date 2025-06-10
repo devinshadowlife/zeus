@@ -21,6 +21,39 @@ export default function ContactCard() {
     };
   }, []);
 
+  const buttons = [
+    {
+      icon: <FaLine className="text-white w-6 h-6" />,
+      bg: "bg-green-500",
+      href: "https://line.me/ti/p/@zeus_ekkamai",
+      title: "LINE",
+    },
+    {
+      icon: <SiWechat className="text-white w-6 h-6" />,
+      bg: "bg-green-600",
+      href: "weixin://dl/chat?zeus_ekkamai",
+      title: "WeChat",
+    },
+    {
+      icon: <FaWhatsapp className="text-white w-6 h-6" />,
+      bg: "bg-emerald-500",
+      href: "https://wa.me/zeus_ekkamai",
+      title: "WhatsApp",
+    },
+    {
+      icon: <SiKakaotalk className="text-black w-6 h-6" />,
+      bg: "bg-yellow-400",
+      href: "https://open.kakao.com/o/scSfEWzf",
+      title: "KakaoTalk",
+    },
+    {
+      icon: <FaTelegramPlane className="text-white w-6 h-6" />,
+      bg: "bg-blue-500",
+      href: "https://t.me/zeusekkamai",
+      title: "Telegram",
+    },
+  ];
+
   return (
     <div
       ref={cardRef}
@@ -28,35 +61,23 @@ export default function ContactCard() {
         inView ? "animate-fade-up" : "opacity-0"
       }`}
     >
-      {" "}
       <p className="font-cinzel uppercase text-sm tracking-widest text-amber-400 mb-4 text-center">
         Contact Us
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base text-center sm:text-left font-lora">
-        <div className="flex items-center gap-2">
-          <FaLine className="text-white w-5 h-5" />
-          <span className="font-semibold">Line:</span>{" "}
-          <span className="text-white/90">zeus_ekkamai</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <SiWechat className="text-white w-5 h-5" />
-          <span className="font-semibold">WeChat:</span>{" "}
-          <span className="text-white/90">zeus_ekkamai</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <FaWhatsapp className="text-white w-5 h-5" />
-          <span className="font-semibold">WhatsApp:</span>{" "}
-          <span className="text-white/90">zeus_ekkamai</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <SiKakaotalk className="text-white w-5 h-5" />
-          <span className="font-semibold">Kakao:</span>{" "}
-          <span className="text-white/90">zeusekkamai</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <FaTelegramPlane className="text-white w-5 h-5" />
-          <span className="font-semibold">Telegram:</span>{" "}
-          <span className="text-white/90">@zeusekkamai</span>
+      <div className="flex justify-center overflow-x-auto">
+        <div className="flex flex-row flex-nowrap gap-3">
+          {buttons.map((btn, idx) => (
+            <a
+              key={idx}
+              href={btn.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={btn.title}
+              className={`${btn.bg} w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:scale-110 transform transition shrink-0`}
+            >
+              {btn.icon}
+            </a>
+          ))}
         </div>
       </div>
     </div>

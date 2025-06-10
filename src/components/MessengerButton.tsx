@@ -34,7 +34,7 @@ export default function MessengerButton() {
       bg: "bg-yellow-400",
       title: "KakaoTalk",
       delay: "delay-250",
-      href: "https://pf.kakao.com/_xeAxkxb/chat", // 카카오 채널 또는 아이디에 따라 다름
+      href: "https://open.kakao.com/o/scSfEWzf", // 카카오 채널 또는 아이디에 따라 다름
     },
     {
       icon: <FaTelegramPlane className="text-white w-5 h-5" />,

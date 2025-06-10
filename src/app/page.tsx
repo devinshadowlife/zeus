@@ -339,125 +339,94 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Bottom Info Section with Background Image */}
-          <div className="relative w-full h-auto mt-24 overflow-hidden">
-            {/* Fixed background image */}
-            {/* PC용 fixed 배경 */}
-            <div
-              className="absolute inset-0 bg-cover bg-center hidden sm:block bg-fixed"
-              style={{ backgroundImage: `url('/images/parking.jpg')` }}
-            />
+        {/* Bottom Info Section with Stylized Background */}
+{/* Bottom Info Section with Stylized Background */}
+<div id="contact" className="relative w-full h-auto mt-24 overflow-hidden">
+  {/* PC: 타원형 마스킹 */}
+  <div className="hidden sm:block absolute inset-0 z-0">
+    <div
+      className="w-full h-full bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: "url('/images/parking.jpg')" }}
+    />
+    <div className="absolute inset-0 bg-black/90 mask-ellipse" />
+  </div>
 
-            {/* 모바일용 일반 배경 */}
-            <div
-              className="absolute inset-0 bg-cover bg-center sm:hidden"
-              style={{ backgroundImage: `url('/images/parking.jpg')` }}
-            />
+  {/* Mobile: 상하 그라데이션 마스킹 */}
+  <div className="sm:hidden absolute inset-0 z-0">
+    <div
+      className="w-full h-full bg-cover bg-center filter grayscale"
+      style={{ backgroundImage: "url('/images/parking.jpg')" }}
+    />
+        <div className="absolute inset-0 bg-black/70 mask-ellipse" />
+    <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-transparent to-black/95" />
+  </div>
 
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/70 z-10" />
+  {/* 콘텐츠 영역 */}
+  <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center px-6 lg:px-20 py-16 text-white gap-10">
+    {/* 로고 */}
+    <div className="w-40 h-40 relative">
+      <Image
+        src="/images/logo.png"
+        alt="Zeus Logo"
+        fill
+        className="object-contain lg:hidden"
+      />
+    </div>
 
-            {/* Content */}
-            <div className="relative z-20 flex flex-col lg:flex-row justify-between items-center px-6 lg:px-20 py-16 text-white gap-10">
-              {/* Logo on the left */}
-              <div className="w-40 h-40 relative">
-                <Image
-                  src="/images/logo.png"
-                  alt="Zeus Logo"
-                  fill
-                  className="object-contain lg:hidden"
-                />
-              </div>
+    {/* 텍스트 콘텐츠 */}
+    <div
+      ref={visitRef}
+      className="text-center lg:text-left max-w-2xl space-y-4"
+    >
+      <p className={`text-sm uppercase tracking-widest text-amber-400 opacity-0 ${visitVisible ? "animate-fade-down [animation-delay:.1s]" : ""}`}>
+        Visit Us
+      </p>
+      <h3 className={`font-cinzel text-3xl sm:text-4xl font-bold drop-shadow-md opacity-0 ${visitVisible ? "animate-fade-down [animation-delay:.3s]" : ""}`}>
+        Your Night Begins at <span className="text-amber-400">ZEUS</span>
+      </h3>
+      <p className={`font-lora text-gray-200 text-base sm:text-lg leading-relaxed opacity-0 ${visitVisible ? "animate-fade-down [animation-delay:.5s]" : ""}`}>
+        Whether you&apos;re looking for a private party, premium
+        drinks, or a space to unwind — our doors are open for an
+        unforgettable night in the heart of Bangkok.
+      </p>
+      <div className="font-lora text-gray-100 text-sm sm:text-base font-light space-y-1 pt-2">
+        <p className={`opacity-0 ${visitVisible ? "animate-fade-down [animation-delay:.7s]" : ""}`}>
+          <span className="font-semibold">Address:</span> 23/1 Ekkamai
+          12 Alley, Khlong Tan Nuea,
+          <br />
+          Watthana, Bangkok 10110
+        </p>
+        <p className={`opacity-0 ${visitVisible ? "animate-fade-down [animation-delay:.9s]" : ""}`}>
+          <span className="font-semibold">Hours:</span> 8 PM – 4 AM
+          (Open Daily)
+        </p>
+        <p className={`opacity-0 ${visitVisible ? "animate-fade-down [animation-delay:1.1s]" : ""}`}>
+          <span className="font-semibold">Phone:</span>{" "}
+          <a
+            href="tel:+66612130971"
+            className="text-amber-400 hover:underline font-medium"
+          >
+            +66 61 213 0971
+          </a>
+        </p>
+      </div>
+    </div>
 
-              {/* Info Text on the right */}
-              <div
-                ref={visitRef}
-                className="text-center lg:text-left max-w-2xl space-y-4"
-              >
-                <p
-                  className={`text-sm uppercase tracking-widest text-amber-400 opacity-0 ${
-                    visitVisible
-                      ? "animate-fade-down [animation-delay:.1s]"
-                      : ""
-                  }`}
-                >
-                  Visit Us
-                </p>
-                <h3
-                  className={`font-cinzel text-3xl sm:text-4xl font-bold drop-shadow-md opacity-0 ${
-                    visitVisible
-                      ? "animate-fade-down [animation-delay:.3s]"
-                      : ""
-                  }`}
-                >
-                  Your Night Begins at{" "}
-                  <span className="text-amber-400">ZEUS</span>
-                </h3>
-                <p
-                  className={`font-lora text-gray-200 text-base sm:text-lg leading-relaxed opacity-0 ${
-                    visitVisible
-                      ? "animate-fade-down [animation-delay:.5s]"
-                      : ""
-                  }`}
-                >
-                  Whether you&apos;re looking for a private party, premium
-                  drinks, or a space to unwind — our doors are open for an
-                  unforgettable night in the heart of Bangkok.
-                </p>
-                <div className="font-lora text-gray-100 text-sm sm:text-base font-light space-y-1 pt-2">
-                  <p
-                    className={`opacity-0 ${
-                      visitVisible
-                        ? "animate-fade-down [animation-delay:.7s]"
-                        : ""
-                    }`}
-                  >
-                    <span className="font-semibold">Address:</span> 23/1 Ekkamai
-                    12 Alley, Khlong Tan Nuea,
-                    <br />
-                    Watthana, Bangkok 10110
-                  </p>
-                  <p
-                    className={`opacity-0 ${
-                      visitVisible
-                        ? "animate-fade-down [animation-delay:.9s]"
-                        : ""
-                    }`}
-                  >
-                    <span className="font-semibold">Hours:</span> 8 PM – 4 AM
-                    (Open Daily)
-                  </p>
-                  <p
-                    className={`opacity-0 ${
-                      visitVisible
-                        ? "animate-fade-down [animation-delay:1.1s]"
-                        : ""
-                    }`}
-                  >
-                    <span className="font-semibold">Phone:</span>{" "}
-                    <a
-                      href="tel:+66612130971"
-                      className="text-amber-400 hover:underline font-medium"
-                    >
-                      +66 61 213 0971
-                    </a>
-                  </p>
-                </div>
-              </div>
+    <ContactCard />
+  </div>
 
-              <ContactCard />
-            </div>
+  {/* 스크롤 업 버튼 */}
+  <div className="relative z-10 flex justify-center pb-10">
+    <a
+      href="#top"
+      className="text-sm text-white border border-white px-4 py-2 rounded-full hover:bg-white hover:text-black transition duration-300"
+    >
+      Back to Top ↑
+    </a>
+  </div>
+</div>
 
-            {/* Scroll to top button */}
-            <div className="relative z-20 flex justify-center pb-10">
-              <a
-                href="#top"
-                className="text-sm text-white border border-white px-4 py-2 rounded-full hover:bg-white hover:text-black transition duration-300"
-              >
-                Back to Top ↑
-              </a>
-            </div>
-          </div>
+
         </div>
       </div>
 

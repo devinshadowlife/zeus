@@ -1,97 +1,90 @@
 "use client";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const imageList = [
-  "/images/Porsche.jpg",
-  "/images/Porsche.jpg",
-  "/images/Porsche.jpg",
-  "/images/Porsche.jpg",
-  "/images/Porsche.jpg",
+const videoList = [
+  { src: "/videos/detail1.mp4", link: "https://www.tiktok.com/@zeus.ekkamai.ktv/video/7509841083992640775?is_from_webapp=1&sender_device=pc&web_id=7483430498758592007" },
+  { src: "/videos/detail2.mp4", link: "https://www.tiktok.com/@zeus.ekkamai.ktv/video/7509121860622159112?is_from_webapp=1&sender_device=pc&web_id=7483430498758592007" },
+  { src: "/videos/detail3.mp4", link: "#" },
+  { src: "/videos/detail4.mp4", link: "https://youtube.com/shorts/kVyWxlC5_kU?si=34BsbYfGLlx8T2D4" },
+  { src: "/videos/detail5.mp4", link: "https://youtube.com/shorts/jEIsCjOfmzQ?si=wme9sUV6_agvLV5F" },
+  { src: "/videos/detail6.mp4", link: "https://youtube.com/shorts/pxkbjBgj9vI?si=dd--p-iOD67ePv55" },
 ];
 
 export default function MenuGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const textRef = useRef<HTMLDivElement | null>(null);
-const [textInView, setTextInView] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
 
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setTextInView(true);
-      }
-    },
-    { threshold: 0.3 }
-  );
-
-  if (textRef.current) observer.observe(textRef.current);
-  return () => observer.disconnect();
-}, []);
-
+  // 섹션이 보일 때만 재생
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.3 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // 자동 슬라이드
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % imageList.length);
+      setCurrentIndex((prev) => (prev + 1) % videoList.length);
     }, 4000);
-
     return () => clearInterval(interval);
   }, []);
 
+  // inView에 따라 재생/정지
+  useEffect(() => {
+    if (videoRef.current) {
+      if (inView) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [inView, currentIndex]);
+
   return (
-    <div className="py-16 text-center">
-      {/* 메인 이미지 */}
-      <div className="mb-8 flex justify-center">
+    <div className="py-16 text-center mb-20">
+      {/* 메인 비디오 */}
+      <div ref={sectionRef} className="mb-8 flex justify-center">
         <div className="relative w-[300px] h-[400px] lg:w-[400px] lg:h-[600px]">
-          <Image
-            src={imageList[currentIndex]}
-            alt="Main Menu Image"
-            fill
-            className="rounded-lg shadow-xl object-cover transition-all duration-500"
+          <video
+            key={videoList[currentIndex].src}
+            ref={videoRef}
+            src={videoList[currentIndex].src}
+            muted
+            loop
+            playsInline
+            className="rounded-lg shadow-xl object-cover w-full h-full"
           />
         </div>
       </div>
 
-      {/* 썸네일 리스트 */}
-      <div className="flex flex-wrap justify-center gap-4 px-4">
-        {imageList.map((img, idx) => (
-          <div
+      {/* 썸네일 2행 3열 */}
+      <div className="grid grid-cols-3 gap-4 px-4 max-w-[600px] mx-auto">
+        {videoList.map((video, idx) => (
+          <a
             key={idx}
-            className={`relative w-[100px] h-[130px] lg:w-[150px] lg:h-[200px] cursor-pointer transition-transform duration-300 ${
-              idx === currentIndex
-                ? "ring-1 ring-amber-500 scale-105"
-                : "opacity-70 hover:opacity-100"
-            }`}
-            onClick={() => setCurrentIndex(idx)}
+            href={video.link}
+            className="relative w-full aspect-[3/4] block group"
           >
-            <Image
-              src={img}
-              alt={`thumb-${idx}`}
-              fill
-              className="rounded object-cover"
+            <video
+              src={video.src}
+              muted
+              playsInline
+              className="rounded-lg object-cover w-full h-full group-hover:ring-2 group-hover:ring-amber-500 transition"
             />
-          </div>
+           
+          </a>
         ))}
       </div>
 
-      <div ref={textRef} className="mt-20">
-  <p
-    className={`font-cinzel text-3xl font-bold mb-1 opacity-0 ${
-      textInView ? "animate-fade-up [animation-delay:0.1s]" : ""
-    }`}
-  >
-    The Best Chef<br/> in Ekkamai, Bangkok
-  </p>
-  <p
-    className={`font-lora text-lg font-semibold mb-9 opacity-0 ${
-      textInView ? "animate-fade-up [animation-delay:0.3s]" : ""
-    }`}
-  >
-    Korean, Chinese, Japanese and Thai food
-  </p>
-</div>
-
+      {/* 텍스트 애니메이션 */}
+     
     </div>
   );
 }

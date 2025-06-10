@@ -9,6 +9,7 @@ const sections = [
   { id: "youtube", label: "Video" },
   { id: "menu", label: "Menu" },
   { id: "map", label: "Map" },
+  { id: "contact", label: "Contact" },
 ];
 
 export default function SectionIndicator() {
