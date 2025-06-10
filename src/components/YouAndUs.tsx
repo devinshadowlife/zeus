@@ -1,7 +1,13 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import en from "@/lib/locales/en.json";
+import kr from "@/lib/locales/kr.json";
+import cn from "@/lib/locales/cn.json";
+import th from "@/lib/locales/th.json";
+import { useParams } from "next/navigation";
 
+const translations = { en, kr, cn, th };
 const imageData = [
   { src: "/images/service1.jpg", title: "Atom" },
   { src: "/images/service2.jpg", title: "Rainbow" },
@@ -23,7 +29,8 @@ export default function YouAndUs() {
   const [isPaused, setIsPaused] = useState(false);
   const [offset, setOffset] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-
+const { locale } = useParams() as { locale: keyof typeof translations };
+  const t = translations[locale] || translations.en;
   // 자동 스크롤 효과
   useEffect(() => {
     if (isPaused) return;
@@ -51,7 +58,7 @@ export default function YouAndUs() {
           ONLY YOU & US
         </p>
         <p className="font-lora text-gray-600 lg:text-lg">
-          It&apos;s time for you to be the best.
+          {t.beTheBest}
         </p>
       </div>
 

@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import en from "@/lib/locales/en.json";
+import kr from "@/lib/locales/kr.json";
+import cn from "@/lib/locales/cn.json";
+import th from "@/lib/locales/th.json";
+import { useParams } from "next/navigation";
+
+const translations = { en, kr, cn, th };
 
 const roomData = [
   { label: "S", desc: "MORE", images: ["/images/s1.jpg"] },
@@ -26,6 +33,9 @@ export default function RoomSection() {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
+
+  const { locale } = useParams() as { locale: keyof typeof translations };
+  const t = translations[locale] || translations.en;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -80,7 +90,7 @@ export default function RoomSection() {
           From private to party
         </p>
         <p className="font-lora mb-10 text-xl lg:text-4xl lg:mb-16">
-          various room sizes
+          {t.roomSizes}
         </p>
 
         <div ref={containerRef} className="flex flex-row gap-4 mx-3 lg:gap-16">

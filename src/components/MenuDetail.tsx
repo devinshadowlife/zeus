@@ -1,6 +1,11 @@
 "use client";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import en from "@/lib/locales/en.json";
+import kr from "@/lib/locales/kr.json";
+import cn from "@/lib/locales/cn.json";
+import th from "@/lib/locales/th.json";
 
 const imageList = [
   "/images/price1.jpg",
@@ -11,6 +16,8 @@ const imageList = [
   "/images/price6.jpg", // 모달 전용
 ];
 
+const translations = { en, kr, cn, th };
+
 const MenuDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -19,6 +26,9 @@ const MenuDetail = () => {
   const imageRef = useRef<HTMLDivElement | null>(null);
 
   const [inView, setInView] = useState(false);
+
+  const { locale } = useParams() as { locale: keyof typeof translations };
+  const t = translations[locale] || translations.en;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -71,18 +81,18 @@ const MenuDetail = () => {
   return (
     <div className="flex flex-col items-center justify-center px-4 py-16 lg:pt-20 gap-8 bg-[#1c1a23]">
       <div
-      ref={imageRef}
-      className={`relative w-full h-[300px] lg:h-[400px] max-w-4xl overflow-hidden rounded-lg shadow-lg opacity-0 ${
-        inView ? "animate-fade-down" : ""
-      }`}
-    >
-      <Image
-        src="/images/table.png"
-        fill
-        alt="table"
-        className="object-cover w-full"
-      />
-    </div>
+        ref={imageRef}
+        className={`relative w-full h-[300px] lg:h-[400px] max-w-4xl overflow-hidden rounded-lg shadow-lg opacity-0 ${
+          inView ? "animate-fade-down" : ""
+        }`}
+      >
+        <Image
+          src="/images/table.png"
+          fill
+          alt="table"
+          className="object-cover w-full"
+        />
+      </div>
       <div className="mt-20 text-center">
         <p className="font-cinzel text-3xl font-bold mb-1 animate-fade-up">
           The Best Chef
@@ -90,7 +100,7 @@ const MenuDetail = () => {
           in Ekkamai, Bangkok
         </p>
         <p className="font-lora text-lg font-semibold mb-9 animate-fade-up [animation-delay:0.3s]">
-          Korean, Chinese, Japanese and Thai food
+          {t.menu}
         </p>
       </div>
       {/* 모바일 전용 layout */}
@@ -98,15 +108,10 @@ const MenuDetail = () => {
         <p className="font-cinzel text-center mb-6 text-3xl text-amber-500 font-semibold lg:text-5xl">
           MENU DETAIL
         </p>
-        <p className="text-center text-base lg:text-lg font-light text-gray-500 font-lora px-4 lg:max-w-2xl">
-          Discover an exquisite range of premium liquors, thoughtfully offered
-          at{" "}
-          <span className="font-semibold text-amber-600">
-            fair and accessible prices
-          </span>
-          . Let our elegant KTV setting elevate your night to something truly
-          memorable.
-        </p>
+        <p
+          className="text-center text-base lg:text-lg font-light text-gray-500 font-lora px-4 lg:max-w-2xl"
+          dangerouslySetInnerHTML={{ __html: t.liquorPromo }}
+        />
       </div>
 
       <div
