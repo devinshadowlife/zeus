@@ -2,12 +2,27 @@
 import { useEffect, useRef, useState } from "react";
 
 const videoList = [
-  { src: "/videos/detail1.mp4", link: "https://www.tiktok.com/@zeus.ekkamai.ktv/video/7509841083992640775?is_from_webapp=1&sender_device=pc&web_id=7483430498758592007" },
-  { src: "/videos/detail2.mp4", link: "https://www.tiktok.com/@zeus.ekkamai.ktv/video/7509121860622159112?is_from_webapp=1&sender_device=pc&web_id=7483430498758592007" },
+  {
+    src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540874/z73eewxmjxxdu0fyy1ey.mp4",
+    link: "https://www.tiktok.com/@zeus.ekkamai.ktv/video/7509841083992640775?is_from_webapp=1&sender_device=pc&web_id=7483430498758592007",
+  },
+  {
+    src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540876/fcxyehgi9d2lunu0adas.mov",
+    link: "https://www.tiktok.com/@zeus.ekkamai.ktv/video/7509121860622159112?is_from_webapp=1&sender_device=pc&web_id=7483430498758592007",
+  },
   { src: "/videos/detail3.mp4", link: "#" },
-  { src: "/videos/detail4.mp4", link: "https://youtube.com/shorts/kVyWxlC5_kU?si=34BsbYfGLlx8T2D4" },
-  { src: "/videos/detail5.mp4", link: "https://youtube.com/shorts/jEIsCjOfmzQ?si=wme9sUV6_agvLV5F" },
-  { src: "/videos/detail6.mp4", link: "https://youtube.com/shorts/pxkbjBgj9vI?si=dd--p-iOD67ePv55" },
+  {
+    src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540879/caunmijaqsiioe75q0wv.mov",
+    link: "https://youtube.com/shorts/kVyWxlC5_kU?si=34BsbYfGLlx8T2D4",
+  },
+  {
+    src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540874/avobbisa5gtmwnmg4b3e.mov",
+    link: "https://youtube.com/shorts/jEIsCjOfmzQ?si=wme9sUV6_agvLV5F",
+  },
+  {
+    src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540875/sfmafja6lgqzvlpd8kvn.mov",
+    link: "https://youtube.com/shorts/pxkbjBgj9vI?si=dd--p-iOD67ePv55",
+  },
 ];
 
 export default function MenuGallery() {
@@ -78,13 +93,11 @@ export default function MenuGallery() {
               playsInline
               className="rounded-lg object-cover w-full h-full group-hover:ring-2 group-hover:ring-amber-500 transition"
             />
-           
           </a>
         ))}
       </div>
 
       {/* 텍스트 애니메이션 */}
-     
     </div>
   );
 }

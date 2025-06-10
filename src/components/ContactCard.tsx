@@ -64,7 +64,7 @@ export default function ContactCard() {
       <p className="font-cinzel uppercase text-sm tracking-widest text-amber-400 mb-4 text-center">
         Contact Us
       </p>
-      <div className="flex justify-center overflow-x-auto">
+      <div className="flex justify-center overflow-x-auto py-2">
         <div className="flex flex-row flex-nowrap gap-3">
           {buttons.map((btn, idx) => (
             <a
