@@ -88,21 +88,13 @@ export default function MenuGallery() {
             href={video.link}
             className="relative w-full aspect-[3/4] block group"
           >
-            <video
-              src={video.src}
-              preload="none"
-              muted
-              playsInline
-              className="hidden sm:block rounded-lg object-cover w-full h-full group-hover:ring-2 group-hover:ring-amber-500 transition"
-            />
-
             {/* Mobile에서는 대체 이미지 (예: number1.jpg, number2.jpg...) */}
             <Image
               src={`/images/videoThumb${idx + 1}.png`}
               alt={`Video ${idx + 1}`}
               width={200}
               height={270}
-              className="block sm:hidden w-full h-full object-cover rounded-lg shadow"
+              className="w-full h-full object-cover rounded-lg shadow hover:ring-2 hover:ring-amber-500 transition"
             />
           </a>
         ))}
