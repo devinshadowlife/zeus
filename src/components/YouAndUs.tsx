@@ -2,12 +2,12 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import en from "@/lib/locales/en.json";
-import kr from "@/lib/locales/kr.json";
-import cn from "@/lib/locales/cn.json";
+import ko from "@/lib/locales/ko.json";
+import zn from "@/lib/locales/zn.json";
 import th from "@/lib/locales/th.json";
 import { useParams } from "next/navigation";
 
-const translations = { en, kr, cn, th };
+const translations = { en, ko, zn, th };
 const imageData = [
   { src: "/images/service1.jpg", title: "Atom" },
   { src: "/images/service2.jpg", title: "Rainbow" },

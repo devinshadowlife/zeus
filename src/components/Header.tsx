@@ -29,14 +29,14 @@ const changeLanguage = (newLocale: string) => {
       {/* 언어 선택 */}
      {/* 언어 선택 */}
 <div className="flex items-center gap-2 lg:gap-4">
-  <button title="한국어" onClick={() => changeLanguage("kr")}>
+  <button title="한국어" onClick={() => changeLanguage("ko")}>
     <img
       src="https://flagcdn.com/w40/kr.png"
       className="w-6 h-4 md:w-10 md:h-6 rounded-sm"
       alt="KR"
     />
   </button>
-  <button title="中文" onClick={() => changeLanguage("cn")}>
+  <button title="中文" onClick={() => changeLanguage("zn")}>
     <img
       src="https://flagcdn.com/w40/cn.png"
       className="w-6 h-4 md:w-10 md:h-6  rounded-sm"

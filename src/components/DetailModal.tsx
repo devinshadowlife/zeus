@@ -2,12 +2,12 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import en from "@/lib/locales/en.json";
-import kr from "@/lib/locales/kr.json";
-import cn from "@/lib/locales/cn.json";
+import ko from "@/lib/locales/ko.json";
+import zn from "@/lib/locales/zn.json";
 import th from "@/lib/locales/th.json";
 import { useParams } from "next/navigation";
 
-const translations = { en, kr, cn, th };
+const translations = { en, ko, zn, th };
 
 const roomData = [
   { image: "/images/room1.jpg" },

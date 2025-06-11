@@ -12,8 +12,8 @@ import ContactCard from "@/components/ContactCard";
 import Header from "@/components/Header";
 import { useParams } from "next/navigation";
 import en from "@/lib/locales/en.json";
-import kr from "@/lib/locales/kr.json";
-import cn from "@/lib/locales/cn.json";
+import ko from "@/lib/locales/ko.json";
+import zn from "@/lib/locales/zn.json";
 import th from "@/lib/locales/th.json";
 
 // Define translation type
@@ -41,18 +41,18 @@ const translations: Record<string, Translation> = {
       suffix: en["luxury.suffix"],
     },
   },
-  kr: {
-    ...kr,
+  ko: {
+    ...ko,
     luxury: {
-      prefix: kr["luxury.prefix"],
-      suffix: kr["luxury.suffix"],
+      prefix: ko["luxury.prefix"],
+      suffix: ko["luxury.suffix"],
     },
   },
-  cn: {
-    ...cn,
+  zn: {
+    ...zn,
     luxury: {
-      prefix: cn["luxury.prefix"],
-      suffix: cn["luxury.suffix"],
+      prefix: zn["luxury.prefix"],
+      suffix: zn["luxury.suffix"],
     },
   },
   th: {
