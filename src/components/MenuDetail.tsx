@@ -24,7 +24,8 @@ const MenuDetail = () => {
   const detailRef = useRef<HTMLDivElement | null>(null);
   const mobileDetailRef = useRef<HTMLDivElement | null>(null); // 모바일용
   const imageRef = useRef<HTMLDivElement | null>(null);
-
+const [bottlesInView, setBottlesInView] = useState(false);
+const bottlesRef = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
 
   const { locale } = useParams() as { locale: keyof typeof translations };
@@ -43,6 +44,24 @@ const MenuDetail = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setBottlesInView(true);
+      }
+    },
+    { threshold: 0.3 }
+  );
+
+  if (bottlesRef.current) observer.observe(bottlesRef.current);
+
+  return () => {
+    if (bottlesRef.current) observer.unobserve(bottlesRef.current);
+  };
+}, []);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -237,7 +256,13 @@ const MenuDetail = () => {
         </div>
       </div>
 
-      <div className="relative mt-10 lg:mt-20 w-full lg:w-[600px] aspect-[4/3] mx-auto">
+      <div
+        className={`relative mt-10 lg:mt-20 w-full lg:w-[600px] aspect-[4/3] mx-auto opacity-0 ${
+          bottlesInView  ? "animate-fade-down" : ""
+        }`}
+        ref={bottlesRef}
+      >
+        {" "}
         <Image
           src="/images/bottles.jpg"
           alt="bottles"

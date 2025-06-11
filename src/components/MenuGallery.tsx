@@ -16,8 +16,8 @@ const videoList = [
     link: "https://youtube.com/shorts/rJz6XchDSss?si=ikyqyL0K9_JrDGCj",
   },
   {
-    src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540879/caunmijaqsiioe75q0wv.mov",
-    link: "https://youtube.com/shorts/kVyWxlC5_kU?si=34BsbYfGLlx8T2D4",
+    src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749620384/83f94e0925a745d99b168010a5fed6f0_clgc9g.mp4",
+    link: "https://youtube.com/shorts/Ym97FXp33a4?si=G8UO3UDoIr_4hyIB",
   },
   {
     src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540874/avobbisa5gtmwnmg4b3e.mov",

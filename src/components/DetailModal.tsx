@@ -10,26 +10,16 @@ import { useParams } from "next/navigation";
 const translations = { en, kr, cn, th };
 
 const roomData = [
-  { label: "S", desc: "MORE", images: ["/images/s1.jpg"] },
-  {
-    label: "M",
-    desc: "MORE",
-    images: ["/images/m1.jpg", "/images/m2.jpg", "/images/m3.jpg"],
-  },
-  {
-    label: "VIP",
-    desc: "MORE",
-    images: ["/images/vip1.jpg", "/images/vip2.jpg"],
-  },
+  { image: "/images/room1.jpg" },
+  { image: "/images/room2.jpg" },
+  { image: "/images/room3.jpg" },
+  { image: "/images/room4.jpg" },
+  { image: "/images/room5.jpg" },
+  { image: "/images/room6.jpg" },
 ];
 
 export default function RoomSection() {
-  type Room = (typeof roomData)[number];
-  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-
-  const [currentIdx, setCurrentIdx] = useState(0);
-
-  const modalContentRef = useRef<HTMLDivElement>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
@@ -49,40 +39,6 @@ export default function RoomSection() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        modalContentRef.current &&
-        !modalContentRef.current.contains(event.target as Node)
-      ) {
-        setSelectedRoom(null);
-        setCurrentIdx(0);
-      }
-    };
-
-    if (selectedRoom) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [selectedRoom]);
-
-  const handleNext = () => {
-    if (!selectedRoom) return;
-    setCurrentIdx((prev) =>
-      prev === selectedRoom.images.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const handlePrev = () => {
-    if (!selectedRoom) return;
-    setCurrentIdx((prev) =>
-      prev === 0 ? selectedRoom.images.length - 1 : prev - 1
-    );
-  };
-
   return (
     <>
       <div className="flex flex-col items-center justify-center pt-24 pb-20 lg:pt-40 lg:pb-28 mt-20 bg-[#1c1a23]">
@@ -93,71 +49,51 @@ export default function RoomSection() {
           {t.roomSizes}
         </p>
 
-        <div ref={containerRef} className="flex flex-row gap-4 mx-3 lg:gap-16">
+        <div
+          ref={containerRef}
+          className="grid grid-cols-2 lg:grid-cols-3 gap-6 px-4"
+        >
           {roomData.map((room, index) => (
             <div
               key={index}
-              className={`flex flex-col items-center cursor-pointer transition-transform hover:scale-105 opacity-0
-        ${inView ? `animate-fade-down [animation-delay:${index * 0.2}s]` : ""}`}
-              onClick={() => {
-                setSelectedRoom(room);
-                setCurrentIdx(0);
-              }}
+              className={`relative cursor-pointer group overflow-hidden rounded-lg shadow-lg opacity-0 ${
+                inView
+                  ? `animate-fade-up [animation-delay:${index * 0.15}s]`
+                  : ""
+              }`}
+              onClick={() => setSelectedImage(room.image)}
             >
               <Image
-                src={room.images[0]}
-                width={200}
-                height={400}
-                alt={room.label}
-                className="mb-4 lg:mb-8"
+                src={room.image}
+                alt={`Room ${index + 1}`}
+                width={500}
+                height={300}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              <p className="font-lora font-bold lg:text-4xl">{room.label}</p>
-              <p className="font-lora mt-2 lg:mt-5 text-sm lg:text-lg px-3 py-1 border border-white/30 rounded-full hover:bg-white/10 transition">
-                {room.desc}
-              </p>{" "}
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300" />
             </div>
           ))}
         </div>
       </div>
 
-      {selectedRoom && (
+      {/* 모달 */}
+      {selectedImage && (
         <div
           className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
-          onClick={() => {
-            setSelectedRoom(null);
-            setCurrentIdx(0);
-          }}
+          onClick={() => setSelectedImage(null)}
         >
           <div
             className="relative w-[90vw] max-w-[1000px] aspect-video"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={selectedRoom.images[currentIdx]}
-              alt={selectedRoom.label}
+              src={selectedImage}
+              alt="Room fullscreen"
               fill
               priority
               className="rounded-xl object-cover"
               sizes="(max-width: 768px) 90vw, 1000px"
             />
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNext();
-              }}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white text-4xl z-50 hover:scale-125 transition"
-            >
-              ›
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePrev();
-              }}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-4xl z-50 hover:scale-125 transition"
-            >
-              ‹
-            </button>
           </div>
         </div>
       )}
