@@ -1,9 +1,16 @@
 // app/[locale]/layout.tsx
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "../globals.css";
 import { Cinzel, Lora } from "next/font/google";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  icons: {
+    icon: "images/logo.png", // 기본 파비콘
+  },
+};
 
 const cinzel = Cinzel({
   subsets: ["latin"],
