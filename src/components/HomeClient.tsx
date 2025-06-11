@@ -74,6 +74,24 @@ export default function HomeClient() {
   const { locale } = useParams() as { locale: keyof typeof translations };
   const t = translations[locale] || translations.en;
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (video) {
+      // iOS Safari용 속성 수동 설정
+      video.setAttribute("playsinline", "true");
+      video.setAttribute("webkit-playsinline", "true");
+      video.setAttribute("x-webkit-airplay", "allow");
+
+      // 자동재생 시도
+      video.play().catch((err) => {
+        console.warn("Autoplay failed:", err);
+      });
+    }
+  }, []);
+
   // Calculate safe VH for mobile
   const getSafeVh = () => {
     const vh = window.innerHeight * 0.01;
@@ -167,14 +185,17 @@ export default function HomeClient() {
     <>
       <Header />
       <video
-        src="/videos/hero_video.mp4"
-        muted
-        autoPlay
-        className="fixed inset-0 w-full h-full object-cover"
-        loop
-        playsInline
-        poster="/images/cover.png"
-      />
+      ref={videoRef}
+      src="/videos/hero_video.mp4"
+      muted
+      autoPlay
+      loop
+      playsInline
+      poster="/images/cover.png"
+      webkit-playsinline="true"
+      x-webkit-airplay="allow"
+      className="fixed inset-0 w-full h-full object-cover"
+    />
 
       <div className="fixed top-0 left-0 w-full h-screen z-20 flex flex-col items-center justify-center text-white text-center pointer-events-none">
         <div

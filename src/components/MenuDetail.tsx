@@ -237,6 +237,16 @@ const MenuDetail = () => {
         </div>
       </div>
 
+      <div className="relative mt-10 lg:mt-20 w-full lg:w-[600px] aspect-[4/3] mx-auto">
+        <Image
+          src="/images/bottles.jpg"
+          alt="bottles"
+          fill /* 이미지가 div를 꽉 채우도록 */
+          sizes="(min-width:1024px) 600px, 100vw"
+          className="object-cover rounded-lg" /* 필요하면 cover → contain 변경 */
+        />
+      </div>
+
       {/* 모달 */}
       {isModalOpen && (
         <div

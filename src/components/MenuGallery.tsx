@@ -5,13 +5,16 @@ import { useEffect, useRef, useState } from "react";
 const videoList = [
   {
     src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540874/z73eewxmjxxdu0fyy1ey.mp4",
-    link: "https://www.tiktok.com/@zeus.ekkamai.ktv/video/7509841083992640775?is_from_webapp=1&sender_device=pc&web_id=7483430498758592007",
+    link: "https://youtube.com/shorts/suWM8s_-5m0?si=Busy6O9-YeTg2tWp",
   },
   {
     src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540876/fcxyehgi9d2lunu0adas.mov",
-    link: "https://www.tiktok.com/@zeus.ekkamai.ktv/video/7509121860622159112?is_from_webapp=1&sender_device=pc&web_id=7483430498758592007",
+    link: "https://youtube.com/shorts/WuicN5FFoN4?si=PjXvCc5-dYWWm2BH",
   },
-  { src: "/videos/detail3.mp4", link: "#" },
+  {
+    src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749618623/detail3_h2wveh.mp4",
+    link: "https://youtube.com/shorts/rJz6XchDSss?si=ikyqyL0K9_JrDGCj",
+  },
   {
     src: "https://res.cloudinary.com/drrrpatyd/video/upload/v1749540879/caunmijaqsiioe75q0wv.mov",
     link: "https://youtube.com/shorts/kVyWxlC5_kU?si=34BsbYfGLlx8T2D4",
