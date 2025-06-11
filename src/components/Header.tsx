@@ -36,7 +36,7 @@ const changeLanguage = (newLocale: string) => {
       alt="KR"
     />
   </button>
-  <button title="中文" onClick={() => changeLanguage("zn")}>
+  <button title="中文" onClick={() => changeLanguage("zh")}>
     <img
       src="https://flagcdn.com/w40/cn.png"
       className="w-6 h-4 md:w-10 md:h-6  rounded-sm"

@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import en from "@/lib/locales/en.json";
 import ko from "@/lib/locales/ko.json";
-import zn from "@/lib/locales/zn.json";
+import zh from "@/lib/locales/zh.json";
 import th from "@/lib/locales/th.json";
 
 const imageList = [
@@ -16,7 +16,7 @@ const imageList = [
   "/images/price6.jpg", // 모달 전용
 ];
 
-const translations = { en, ko, zn, th };
+const translations = { en, ko, zh, th };
 
 const MenuDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

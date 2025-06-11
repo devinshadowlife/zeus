@@ -13,7 +13,7 @@ import Header from "@/components/Header";
 import { useParams } from "next/navigation";
 import en from "@/lib/locales/en.json";
 import ko from "@/lib/locales/ko.json";
-import zn from "@/lib/locales/zn.json";
+import zh from "@/lib/locales/zh.json";
 import th from "@/lib/locales/th.json";
 
 // Define translation type
@@ -48,11 +48,11 @@ const translations: Record<string, Translation> = {
       suffix: ko["luxury.suffix"],
     },
   },
-  zn: {
-    ...zn,
+  zh: {
+    ...zh,
     luxury: {
-      prefix: zn["luxury.prefix"],
-      suffix: zn["luxury.suffix"],
+      prefix: zh["luxury.prefix"],
+      suffix: zh["luxury.suffix"],
     },
   },
   th: {
