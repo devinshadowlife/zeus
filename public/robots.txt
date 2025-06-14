@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://zeusbangkok.com
+
+# Sitemaps
+Sitemap: https://zeusbangkok.com/sitemap.xml
