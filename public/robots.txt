@@ -6,4 +6,4 @@ Allow: /
 Host: https://zeusbangkok.com
 
 # Sitemaps
-Sitemap: https://zeusbangkok.com/sitemap.xml
+Sitemap: https://zeusbangkok.com/sitemap-0.xml
