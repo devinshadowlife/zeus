@@ -17,6 +17,7 @@ const hashtags = {
     "#BangkokNightlife",
     "#BangkokBars",
     "#BangkokParty",
+    "#BangkokKaraoke"
   ],
   ko: [
     "#ZeusEkkamai",
