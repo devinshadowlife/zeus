@@ -1,12 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { FaCommentDots, FaLine, FaWhatsapp, FaTelegramPlane } from "react-icons/fa";
+import {
+  FaCommentDots,
+  FaLine,
+  FaWhatsapp,
+  FaTelegramPlane,
+} from "react-icons/fa";
 import { SiKakaotalk, SiWechat } from "react-icons/si";
 
 export default function MessengerButton() {
   const [open, setOpen] = useState(false);
-  const [showQR, setShowQR] = useState(false);
+  const [showQR, setShowQR] = useState<{ line: boolean; wechat: boolean }>({
+    line: false,
+    wechat: false,
+  });
 
   const buttons = [
     {
@@ -14,14 +22,14 @@ export default function MessengerButton() {
       bg: "bg-green-500",
       title: "LINE",
       delay: "delay-100",
-      onclick: () => setShowQR(true),
+      onclick: () => setShowQR({ line: true, wechat: false }),
     },
     {
       icon: <SiWechat className="text-white w-5 h-5" />,
       bg: "bg-green-600",
       title: "WeChat",
       delay: "delay-150",
-      href: "weixin://dl/chat?zeus_ekkamai", // 위챗은 브라우저에서 안 열릴 수 있음
+      onclick: () => setShowQR({ line: false, wechat: true }),
     },
     {
       icon: <FaWhatsapp className="text-white w-5 h-5" />,
@@ -53,8 +61,14 @@ export default function MessengerButton() {
         <div className="flex flex-col items-center gap-3 mb-2">
           {buttons.map((btn, i) => {
             const baseStyle = `
-              ${btn.bg} p-2 rounded-full shadow-lg transform transition-all duration-300
-              ${open ? `opacity-100 translate-y-0 ${btn.delay}` : "opacity-0 translate-y-4 pointer-events-none"}
+              ${
+                btn.bg
+              } p-2 rounded-full shadow-lg transform transition-all duration-300
+              ${
+                open
+                  ? `opacity-100 translate-y-0 ${btn.delay}`
+                  : "opacity-0 translate-y-4 pointer-events-none"
+              }
             `;
 
             // LINE만 onClick으로 처리
@@ -95,19 +109,19 @@ export default function MessengerButton() {
       </div>
 
       {/* LINE QR Modal (dark and elegant) */}
-      {showQR && (
+      {(showQR.line || showQR.wechat) && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-50">
           <div className="bg-zinc-900 text-white rounded-xl p-6 shadow-2xl relative w-[90%] max-w-md">
             <button
-              onClick={() => setShowQR(false)}
+              onClick={() => setShowQR({ line: false, wechat: false })}
               className="absolute top-3 right-4 text-gray-300 hover:text-white text-2xl"
             >
               &times;
             </button>
             <div className="flex flex-col items-center">
               <img
-                src="/images/lineQR.jpg"
-                alt="LINE QR Code"
+                 src={showQR.line ? "/images/lineQR.jpg" : "/images/wechat.jpg"}
+                alt={showQR.line ? "LINE QR Code" : "WeChat QR Code"}
                 width={280}
                 height={280}
                 className="rounded-lg border border-white"
