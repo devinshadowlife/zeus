@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import en from "@/lib/locales/en.json";
 import ko from "@/lib/locales/ko.json";
 import zh from "@/lib/locales/zh.json";
@@ -29,7 +28,7 @@ export default function YouAndUs() {
   const [isPaused, setIsPaused] = useState(false);
   const [offset, setOffset] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-const { locale } = useParams() as { locale: keyof typeof translations };
+  const { locale } = useParams() as { locale: keyof typeof translations };
   const t = translations[locale] || translations.en;
   // 자동 스크롤 효과
   useEffect(() => {
@@ -57,9 +56,7 @@ const { locale } = useParams() as { locale: keyof typeof translations };
         <p className="font-cinzel text-3xl lg:text-5xl font-semibold mb-5">
           ONLY YOU & US
         </p>
-        <p className="font-lora text-gray-600 lg:text-lg">
-          {t.beTheBest}
-        </p>
+        <p className="font-lora text-gray-600 lg:text-lg">{t.beTheBest}</p>
       </div>
 
       {/* 이미지 슬라이더 */}
@@ -100,11 +97,10 @@ const { locale } = useParams() as { locale: keyof typeof translations };
                 setIsPaused(true);
               }}
             >
-              <Image
+              <img
                 src={item.src}
                 alt={item.title}
-                fill
-                className="rounded-lg shadow-lg object-fill"
+                className="absolute inset-0 w-full h-full rounded-lg shadow-lg object-fill"
               />
             </div>
           ))}
@@ -134,11 +130,10 @@ const { locale } = useParams() as { locale: keyof typeof translations };
               ×
             </button>
             <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[60vh] mb-4 rounded-lg overflow-hidden mx-auto">
-              <Image
+              <img
                 src={selected.src}
                 alt={selected.title}
-                fill
-                className="object-contain"
+                className="absolute inset-0 w-full h-full object-contain"
               />
             </div>
             <h2 className="font-cinzel text-2xl font-semibold mb-2 text-amber-400">

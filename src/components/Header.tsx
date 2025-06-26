@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function Header() {
@@ -17,10 +16,9 @@ const changeLanguage = (newLocale: string) => {
     <header className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-2 lg:px-6 py-3 bg-transparent backdrop-blur-sm">
       {/* 로고 */}
       <div className="relative w-16 h-6 sm:w-20 sm:h-8 md:w-24 md:h-10 lg:w-32 lg:h-12">
-        <Image
+        <img
           src="/images/logo.png"
-          fill
-          className="object-contain"
+          className="w-full h-full object-contain"
             sizes="(max-width: 768px) 150px, 280px"
           alt="logo"
         />

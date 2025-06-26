@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { FaLine, FaWhatsapp, FaTelegramPlane } from "react-icons/fa";
 import { SiKakaotalk, SiWechat } from "react-icons/si";
@@ -116,7 +115,7 @@ export default function ContactCard() {
               &times;
             </button>
             <div className="flex flex-col items-center">
-              <Image
+              <img
                 src="/images/lineQR.jpg"
                 alt="LINE QR Code"
                 width={280}

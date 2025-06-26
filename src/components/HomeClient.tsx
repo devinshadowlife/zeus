@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import RoomSection from "@/components/DetailModal";
 import MenuGallery from "@/components/MenuGallery";
 import YouAndUs from "@/components/YouAndUs";
@@ -200,13 +199,12 @@ export default function HomeClient({locale}: { locale: string }) {
           className="z-10 pt-32 transition-opacity duration-300 animate-fade-up"
           style={{ opacity: fadeOpacity }}
         >
-          <Image
+          <img
             alt="ZEUS Karaoke Ekkamai Logo"
             src="/images/logo.png"
             width={150}
             height={50}
             className="mx-auto w-[240px] sm:w-[280px] md:w-[320px] lg:w-[450px] h-auto"
-            priority
           />
           <p className="font-cinzel mb-3 mt-10 text-4xl lg:text-6xl font-bold drop-shadow-lg text-white/70">
             BE GOD
@@ -290,11 +288,11 @@ export default function HomeClient({locale}: { locale: string }) {
 
             {/* Image Section */}
             <div className="relative w-[85%] lg:w-[45%] aspect-[16/9] rounded-xl shadow-lg overflow-hidden">
-  <Image
+  <img
     src="/images/parking.jpg"
-    fill
+    
     alt="ZEUS Karaoke Ekkamai Experience"
-    className="object-cover"
+    className="w-full h-full object-cover"
   />
 
   {/* 강하게 보이는 긴 타원형 액자 그라데이션 */}
@@ -449,11 +447,11 @@ export default function HomeClient({locale}: { locale: string }) {
             {/* Content */}
             <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center px-6 lg:px-20 py-16 text-white gap-10">
               <div className="w-40 h-40 relative">
-                <Image
+                <img
                   src="/images/logo.png"
                   alt="ZEUS Karaoke Ekkamai Logo"
-                  fill
-                  className="object-contain lg:hidden"
+                  
+    className="w-full h-full object-contain lg:hidden"
                 />
               </div>
               <div

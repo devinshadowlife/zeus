@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import en from "@/lib/locales/en.json";
@@ -24,8 +23,8 @@ const MenuDetail = () => {
   const detailRef = useRef<HTMLDivElement | null>(null);
   const mobileDetailRef = useRef<HTMLDivElement | null>(null); // 모바일용
   const imageRef = useRef<HTMLDivElement | null>(null);
-const [bottlesInView, setBottlesInView] = useState(false);
-const bottlesRef = useRef<HTMLDivElement | null>(null);
+  const [bottlesInView, setBottlesInView] = useState(false);
+  const bottlesRef = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
 
   const { locale } = useParams() as { locale: keyof typeof translations };
@@ -46,22 +45,21 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
   }, []);
 
   useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setBottlesInView(true);
-      }
-    },
-    { threshold: 0.3 }
-  );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setBottlesInView(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
 
-  if (bottlesRef.current) observer.observe(bottlesRef.current);
+    if (bottlesRef.current) observer.observe(bottlesRef.current);
 
-  return () => {
-    if (bottlesRef.current) observer.unobserve(bottlesRef.current);
-  };
-}, []);
-
+    return () => {
+      if (bottlesRef.current) observer.unobserve(bottlesRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -105,11 +103,10 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
           inView ? "animate-fade-down" : ""
         }`}
       >
-        <Image
+        <img
           src="/images/table.png"
-          fill
           alt="table"
-          className="object-cover w-full"
+          className="absolute inset-0 w-full h-full object-cover rounded-lg"
         />
       </div>
       <div className="mt-20 text-center">
@@ -137,7 +134,7 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
         ref={mobileDetailRef}
         className="flex flex-col w-full items-center lg:hidden gap-6"
       >
-        <Image
+        <img
           src={imageList[0]}
           width={500}
           height={600}
@@ -168,11 +165,10 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
                   : ""
               }`}
             >
-              <Image
+              <img
                 src={src}
                 alt={`detail image ${idx + 2}`}
-                fill
-                className="object-cover rounded-lg shadow cursor-pointer"
+                className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
                 onClick={() => handleOpen(idx + 1)}
               />
             </div>
@@ -184,11 +180,10 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
       <div className="hidden lg:flex flex-row gap-10">
         {/* 왼쪽: 큰 이미지 */}
         <div className="flex-shrink-0 w-[300px] h-[600px] relative">
-          <Image
+          <img
             src={imageList[0]}
             alt="main image"
-            fill
-            className="rounded-lg shadow cursor-pointer object-cover"
+            className="absolute inset-0 w-full h-full rounded-lg shadow cursor-pointer object-cover"
             onClick={() => handleOpen(0)}
           />
         </div>
@@ -214,11 +209,10 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
                     : ""
                 }`}
               >
-                <Image
+                <img
                   src={src}
                   alt={`detail image ${idx + 2}`}
-                  fill
-                  className="object-cover rounded-lg shadow cursor-pointer"
+                  className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
                   onClick={() => handleOpen(idx + 1)}
                 />
               </div>
@@ -243,11 +237,10 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
                     : ""
                 }`}
               >
-                <Image
+                <img
                   src={src}
                   alt={`detail image ${idx + 4}`}
-                  fill
-                  className="object-cover rounded-lg shadow cursor-pointer"
+                  className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
                   onClick={() => handleOpen(idx + 3)}
                 />
               </div>
@@ -258,17 +251,16 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
 
       <div
         className={`relative mt-10 lg:mt-20 w-full lg:w-[600px] aspect-[4/3] mx-auto opacity-0 ${
-          bottlesInView  ? "animate-fade-down" : ""
+          bottlesInView ? "animate-fade-down" : ""
         }`}
         ref={bottlesRef}
       >
         {" "}
-        <Image
+        <img
           src="/images/bottles.jpg"
           alt="bottles"
-          fill /* 이미지가 div를 꽉 채우도록 */
           sizes="(min-width:1024px) 600px, 100vw"
-          className="object-cover rounded-lg" /* 필요하면 cover → contain 변경 */
+          className="absolute inset-0 w-full h-full object-cover rounded-lg"
         />
       </div>
 
@@ -288,12 +280,10 @@ const bottlesRef = useRef<HTMLDivElement | null>(null);
             >
               ✕
             </button>
-            <Image
+            <img
               src={imageList[currentIdx]}
               alt="fullscreen image"
-              fill
-              className="object-contain rounded-xl"
-              priority
+              className="absolute inset-0 w-full h-full object-contain rounded-xl"
             />
             <button
               onClick={handlePrev}

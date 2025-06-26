@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import en from "@/lib/locales/en.json";
 import ko from "@/lib/locales/ko.json";
@@ -63,7 +62,7 @@ export default function RoomSection() {
               }`}
               onClick={() => setSelectedImage(room.image)}
             >
-              <Image
+              <img
                 src={room.image}
                 alt={`Room ${index + 1}`}
                 width={500}
@@ -86,12 +85,11 @@ export default function RoomSection() {
             className="relative w-[90vw] max-w-[1000px] aspect-video"
             onClick={(e) => e.stopPropagation()}
           >
-            <Image
+            <img
               src={selectedImage}
               alt="Room fullscreen"
-              fill
-              priority
-              className="rounded-xl object-cover"
+              
+    className="absolute inset-0 w-full h-full object-cover rounded-xl"
               sizes="(max-width: 768px) 90vw, 1000px"
             />
           </div>

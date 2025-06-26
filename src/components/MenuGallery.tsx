@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const videoList = [
@@ -92,7 +91,7 @@ export default function MenuGallery() {
             className="relative w-full aspect-[3/4] block group"
           >
             {/* Mobile에서는 대체 이미지 (예: number1.jpg, number2.jpg...) */}
-            <Image
+            <img
               src={`/images/videoThumb${idx + 1}.png`}
               alt={`Video ${idx + 1}`}
               width={200}
