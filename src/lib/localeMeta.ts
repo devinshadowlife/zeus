@@ -1,11 +1,5 @@
 // app/[locale]/page.tsx
-import HomeClient from "@/components/HomeClient";
 import type { Metadata } from "next";
-
-// ✅ SSG로 locale별 HTML 미리 생성
-export function generateStaticParams() {
-  return ["en", "ko", "th", "zh"].map((locale) => ({ locale }));
-}
 
 const hashtags = {
   en: [
@@ -57,7 +51,7 @@ const hashtags = {
 };
 
 // ✅ locale별 메타데이터 정의
-const metadataByLocale: Record<string, Metadata> = {
+export const metadataByLocale: Record<string, Metadata> = {
   en: {
     title: "ZEUS Karaoke Bangkok - Premium KTV Experience in Ekkamai",
     description:
@@ -151,18 +145,3 @@ const metadataByLocale: Record<string, Metadata> = {
     },
   },
 };
-
-// ✅ locale별 메타데이터 반환
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  return metadataByLocale[locale] || metadataByLocale.en;
-}
-
-// ✅ 페이지 본문
-export default function Home() {
-  return <HomeClient />;
-}

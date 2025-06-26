@@ -10,7 +10,6 @@ import MessengerButton from "@/components/MessengerButton";
 import MenuDetail from "@/components/MenuDetail";
 import ContactCard from "@/components/ContactCard";
 import Header from "@/components/Header";
-import { useParams } from "next/navigation";
 import en from "@/lib/locales/en.json";
 import ko from "@/lib/locales/ko.json";
 import zh from "@/lib/locales/zh.json";
@@ -64,15 +63,14 @@ const translations: Record<string, Translation> = {
   },
 };
 
-export default function HomeClient() {
+export default function HomeClient({locale}: { locale: string }) {
   const [fadeOpacity, setFadeOpacity] = useState(1);
   const [aboutVisible, setAboutVisible] = useState(false);
   const [visitVisible, setVisitVisible] = useState(false);
   const visitRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
-  const { locale } = useParams() as { locale: keyof typeof translations };
-  const t = translations[locale] || translations.en;
+  const t = translations[locale as keyof typeof translations] || translations.en;
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
