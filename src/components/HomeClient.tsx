@@ -62,14 +62,15 @@ const translations: Record<string, Translation> = {
   },
 };
 
-export default function HomeClient({locale}: { locale: string }) {
+export default function HomeClient({ locale }: { locale: string }) {
   const [fadeOpacity, setFadeOpacity] = useState(1);
   const [aboutVisible, setAboutVisible] = useState(false);
   const [visitVisible, setVisitVisible] = useState(false);
   const visitRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
-  const t = translations[locale as keyof typeof translations] || translations.en;
+  const t =
+    translations[locale as keyof typeof translations] || translations.en;
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -182,17 +183,17 @@ export default function HomeClient({locale}: { locale: string }) {
     <>
       <Header />
       <video
-      ref={videoRef}
-      src="/videos/hero_video.mp4"
-      muted
-      autoPlay
-      loop
-      playsInline
-      poster="/images/cover.png"
-      webkit-playsinline="true"
-      x-webkit-airplay="allow"
-      className="fixed inset-0 w-full h-full object-cover"
-    />
+        ref={videoRef}
+        src="/videos/hero_video.mp4"
+        muted
+        autoPlay
+        loop
+        playsInline
+        poster="/images/cover.png"
+        webkit-playsinline="true"
+        x-webkit-airplay="allow"
+        className="fixed inset-0 w-full h-full object-cover"
+      />
 
       <div className="fixed top-0 left-0 w-full h-screen z-20 flex flex-col items-center justify-center text-white text-center pointer-events-none">
         <div
@@ -288,20 +289,23 @@ export default function HomeClient({locale}: { locale: string }) {
 
             {/* Image Section */}
             <div className="relative w-[85%] lg:w-[45%] aspect-[16/9] rounded-xl shadow-lg overflow-hidden">
-  <img
-    src="/images/parking.jpg"
-    
-    alt="ZEUS Karaoke Ekkamai Experience"
-    className="w-full h-full object-cover"
-  />
+              <picture>
+                <source srcSet="/images/parking.avif" type="images/avif" />
+                <source srcSet="/images/parking.webp" type="images/webp" />
+                <img
+                  src="/images/parking.jpg"
+                  alt="ZEUS Karaoke Ekkamai Experience"
+                  className="w-full h-full object-cover"
+                />
+              </picture>
 
-  {/* 강하게 보이는 긴 타원형 액자 그라데이션 */}
-   {/* 강하고 부드러운 긴 타원형 액자 그라데이션 */}
-<div className="absolute inset-0 pointer-events-none z-10">
-  <div
-    className="w-full h-full"
-    style={{
-      background: `radial-gradient(
+              {/* 강하게 보이는 긴 타원형 액자 그라데이션 */}
+              {/* 강하고 부드러운 긴 타원형 액자 그라데이션 */}
+              <div className="absolute inset-0 pointer-events-none z-10">
+                <div
+                  className="w-full h-full"
+                  style={{
+                    background: `radial-gradient(
         ellipse 100% 75% at center,
         rgba(0,0,17,0) 30%,
         rgba(0,0,17,0.5) 40%,
@@ -311,12 +315,10 @@ export default function HomeClient({locale}: { locale: string }) {
         rgba(0,0,17,1) 90%,
         rgba(0,0,17,1) 100%
       )`,
-    }}
-  />
-</div>
-
-</div>
-
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
           <div id="room">
@@ -450,8 +452,7 @@ export default function HomeClient({locale}: { locale: string }) {
                 <img
                   src="/images/logo.png"
                   alt="ZEUS Karaoke Ekkamai Logo"
-                  
-    className="w-full h-full object-contain lg:hidden"
+                  className="w-full h-full object-contain lg:hidden"
                 />
               </div>
               <div

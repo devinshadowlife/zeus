@@ -88,22 +88,29 @@ export default function YouAndUs() {
             transition: isPaused ? "transform 0.3s ease" : "none",
           }}
         >
-          {[...imageData, ...imageData].map((item, idx) => (
-            <div
-              key={idx}
-              className="relative flex-shrink-0 min-w-[160px] h-56 lg:min-w-[256px] lg:h-80 cursor-pointer transition-transform duration-300 hover:-translate-y-2"
-              onClick={() => {
-                setSelected(item);
-                setIsPaused(true);
-              }}
-            >
-              <img
-                src={item.src}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full rounded-lg shadow-lg object-fill"
-              />
-            </div>
-          ))}
+          {[...imageData, ...imageData].map((item, idx) => {
+            const basePath = item.src.replace(/\.(jpg|jpeg|png)$/, "");
+            return (
+              <div
+                key={idx}
+                className="relative flex-shrink-0 min-w-[160px] h-56 lg:min-w-[256px] lg:h-80 cursor-pointer transition-transform duration-300 hover:-translate-y-2"
+                onClick={() => {
+                  setSelected(item);
+                  setIsPaused(true);
+                }}
+              >
+                <picture>
+                  <source srcSet={`${basePath}.avif`} type="image/avif" />
+                  <source srcSet={`${basePath}.webp`} type="image/webp" />
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full rounded-lg shadow-lg object-fill"
+                  />
+                </picture>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -130,12 +137,26 @@ export default function YouAndUs() {
               ×
             </button>
             <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[60vh] mb-4 rounded-lg overflow-hidden mx-auto">
-              <img
-                src={selected.src}
-                alt={selected.title}
-                className="absolute inset-0 w-full h-full object-contain"
-              />
+              {selected &&
+                (() => {
+                  const basePath = selected.src.replace(
+                    /\.(jpg|jpeg|png)$/,
+                    ""
+                  );
+                  return (
+                    <picture>
+                      <source srcSet={`${basePath}.avif`} type="image/avif" />
+                      <source srcSet={`${basePath}.webp`} type="image/webp" />
+                      <img
+                        src={selected.src}
+                        alt={selected.title}
+                        className="absolute inset-0 w-full h-full object-contain"
+                      />
+                    </picture>
+                  );
+                })()}
             </div>
+
             <h2 className="font-cinzel text-2xl font-semibold mb-2 text-amber-400">
               {selected.title}
             </h2>

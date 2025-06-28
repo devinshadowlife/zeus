@@ -103,11 +103,15 @@ const MenuDetail = () => {
           inView ? "animate-fade-down" : ""
         }`}
       >
-        <img
-          src="/images/table.png"
-          alt="table"
-          className="absolute inset-0 w-full h-full object-cover rounded-lg"
-        />
+        <picture>
+          <source srcSet="/images/table.avif" type="images/avif" />
+          <source srcSet="/images/table.webp" type="images/webp" />
+          <img
+            src="/images/table.png"
+            alt="table"
+            className="absolute inset-0 w-full h-full object-cover rounded-lg"
+          />
+        </picture>
       </div>
       <div className="mt-20 text-center">
         <p className="font-cinzel text-3xl font-bold mb-1 animate-fade-up">
@@ -134,16 +138,27 @@ const MenuDetail = () => {
         ref={mobileDetailRef}
         className="flex flex-col w-full items-center lg:hidden gap-6"
       >
-        <img
-          src={imageList[0]}
-          width={500}
-          height={600}
-          alt="main image"
-          className={`rounded-lg shadow cursor-pointer w-full max-w-md object-cover opacity-0 ${
-            inView ? "animate-fade-right [animation-delay:0.1s]" : ""
-          }`}
-          onClick={() => handleOpen(0)}
-        />
+        <picture>
+          <source
+            srcSet={imageList[0].replace(/\.(jpg|png)$/, ".avif")}
+            type="image/avif"
+          />
+          <source
+            srcSet={imageList[0].replace(/\.(jpg|png)$/, ".webp")}
+            type="image/webp"
+          />
+
+          <img
+            src={imageList[0]}
+            width={500}
+            height={600}
+            alt="main image"
+            className={`rounded-lg shadow cursor-pointer w-full max-w-md object-cover opacity-0 ${
+              inView ? "animate-fade-right [animation-delay:0.1s]" : ""
+            }`}
+            onClick={() => handleOpen(0)}
+          />
+        </picture>
 
         <p
           className={`font-lora text-gray-600 text-center text-lg lg:text-2xl font-semibold opacity-0 ${
@@ -154,25 +169,36 @@ const MenuDetail = () => {
         </p>
 
         <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-          {imageList.slice(1, 5).map((src, idx) => (
-            <div
-              key={src}
-              className={`relative w-full h-[200px] opacity-0 ${
-                inView
-                  ? idx % 2 === 0
-                    ? `animate-fade-right [animation-delay:${0.4 + idx * 0.2}s]`
-                    : `animate-fade-left [animation-delay:${0.4 + idx * 0.2}s]`
-                  : ""
-              }`}
-            >
-              <img
-                src={src}
-                alt={`detail image ${idx + 2}`}
-                className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
-                onClick={() => handleOpen(idx + 1)}
-              />
-            </div>
-          ))}
+          {imageList.slice(1, 5).map((src, idx) => {
+            const basePath = src.replace(/\.(jpg|png)$/, "");
+            return (
+              <div
+                key={src}
+                className={`relative w-full h-[200px] opacity-0 ${
+                  inView
+                    ? idx % 2 === 0
+                      ? `animate-fade-right [animation-delay:${
+                          0.4 + idx * 0.2
+                        }s]`
+                      : `animate-fade-left [animation-delay:${
+                          0.4 + idx * 0.2
+                        }s]`
+                    : ""
+                }`}
+              >
+                <picture>
+                  <source srcSet={`${basePath}.avif`} type="image/avif" />
+                  <source srcSet={`${basePath}.webp`} type="image/webp" />
+                  <img
+                    src={src}
+                    alt={`detail image ${idx + 2}`}
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
+                    onClick={() => handleOpen(idx + 1)}
+                  />
+                </picture>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -180,12 +206,22 @@ const MenuDetail = () => {
       <div className="hidden lg:flex flex-row gap-10">
         {/* 왼쪽: 큰 이미지 */}
         <div className="flex-shrink-0 w-[300px] h-[600px] relative">
-          <img
-            src={imageList[0]}
-            alt="main image"
-            className="absolute inset-0 w-full h-full rounded-lg shadow cursor-pointer object-cover"
-            onClick={() => handleOpen(0)}
-          />
+          <picture>
+            <source
+              srcSet={imageList[0].replace(/\.(jpg|png)$/, ".avif")}
+              type="image/avif"
+            />
+            <source
+              srcSet={imageList[0].replace(/\.(jpg|png)$/, ".webp")}
+              type="image/webp"
+            />
+            <img
+              src={imageList[0]}
+              alt="main image"
+              className="absolute inset-0 w-full h-full rounded-lg shadow cursor-pointer object-cover"
+              onClick={() => handleOpen(0)}
+            />
+          </picture>
         </div>
 
         {/* 오른쪽: 썸네일 2-텍스트-2 구조 */}
@@ -198,25 +234,33 @@ const MenuDetail = () => {
         >
           {/* 상단 이미지 1, 2 */}
           <div className="flex gap-6">
-            {imageList.slice(1, 3).map((src, idx) => (
-              <div
-                key={src}
-                className={`w-[200px] h-[270px] relative opacity-0 ${
-                  inView
-                    ? idx === 0
-                      ? "animate-fade-right [animation-delay:0.1s]"
-                      : "animate-fade-left [animation-delay:0.3s]"
-                    : ""
-                }`}
-              >
-                <img
-                  src={src}
-                  alt={`detail image ${idx + 2}`}
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
-                  onClick={() => handleOpen(idx + 1)}
-                />
-              </div>
-            ))}
+            {imageList.slice(1, 3).map((src, idx) => {
+              const basePath = src.replace(/\.(jpg|png)$/, "");
+
+              return (
+                <div
+                  key={src}
+                  className={`w-[200px] h-[270px] relative opacity-0 ${
+                    inView
+                      ? idx === 0
+                        ? "animate-fade-right [animation-delay:0.1s]"
+                        : "animate-fade-left [animation-delay:0.3s]"
+                      : ""
+                  }`}
+                >
+                  <picture>
+                    <source srcSet={`${basePath}.avif`} type="image/avif" />
+                    <source srcSet={`${basePath}.webp`} type="image/webp" />
+                    <img
+                      src={src}
+                      alt={`detail image ${idx + 2}`}
+                      className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
+                      onClick={() => handleOpen(idx + 1)}
+                    />
+                  </picture>
+                </div>
+              );
+            })}
           </div>
 
           {/* 중간 텍스트 */}
@@ -226,25 +270,34 @@ const MenuDetail = () => {
 
           {/* 하단 이미지 3, 4 */}
           <div className="flex gap-6">
-            {imageList.slice(3, 5).map((src, idx) => (
-              <div
-                key={src}
-                className={`w-[200px] h-[240px] relative opacity-0 ${
-                  inView
-                    ? idx === 0
-                      ? "animate-fade-right [animation-delay:0.5s]"
-                      : "animate-fade-left [animation-delay:0.7s]"
-                    : ""
-                }`}
-              >
-                <img
-                  src={src}
-                  alt={`detail image ${idx + 4}`}
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
-                  onClick={() => handleOpen(idx + 3)}
-                />
-              </div>
-            ))}
+            {imageList.slice(3, 5).map((src, idx) => {
+              const basePath = src.replace(/\.(jpg|png)$/, "");
+
+              return (
+                <div
+                  key={src}
+                  className={`w-[200px] h-[240px] relative opacity-0 ${
+                    inView
+                      ? idx === 0
+                        ? "animate-fade-right [animation-delay:0.5s]"
+                        : "animate-fade-left [animation-delay:0.7s]"
+                      : ""
+                  }`}
+                >
+                  <picture>
+                    <source srcSet={`${basePath}.avif`} type="image/avif" />
+                    <source srcSet={`${basePath}.webp`} type="image/webp" />
+
+                    <img
+                      src={src}
+                      alt={`detail image ${idx + 4}`}
+                      className="absolute inset-0 w-full h-full object-cover rounded-lg shadow cursor-pointer"
+                      onClick={() => handleOpen(idx + 3)}
+                    />
+                  </picture>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -256,12 +309,16 @@ const MenuDetail = () => {
         ref={bottlesRef}
       >
         {" "}
-        <img
-          src="/images/bottles.jpg"
-          alt="bottles"
-          sizes="(min-width:1024px) 600px, 100vw"
-          className="absolute inset-0 w-full h-full object-cover rounded-lg"
-        />
+        <picture>
+          <source srcSet="/images/bottles.avif" type="images/avif" />
+          <source srcSet="/images/bottles.webp" type="images/webp" />
+          <img
+            src="/images/bottles.jpg"
+            alt="bottles"
+            sizes="(min-width:1024px) 600px, 100vw"
+            className="absolute inset-0 w-full h-full object-cover rounded-lg"
+          />
+        </picture>
       </div>
 
       {/* 모달 */}
@@ -280,11 +337,30 @@ const MenuDetail = () => {
             >
               ✕
             </button>
-            <img
-              src={imageList[currentIdx]}
-              alt="fullscreen image"
-              className="absolute inset-0 w-full h-full object-contain rounded-xl"
-            />
+            {imageList[currentIdx] && (
+              <picture>
+                <source
+                  srcSet={imageList[currentIdx].replace(
+                    /\.(jpg|png)$/,
+                    ".avif"
+                  )}
+                  type="image/avif"
+                />
+                <source
+                  srcSet={imageList[currentIdx].replace(
+                    /\.(jpg|png)$/,
+                    ".webp"
+                  )}
+                  type="image/webp"
+                />
+                <img
+                  src={imageList[currentIdx]}
+                  alt="fullscreen image"
+                  className="absolute inset-0 w-full h-full object-contain rounded-xl"
+                />
+              </picture>
+            )}
+
             <button
               onClick={handlePrev}
               className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-4xl z-50 hover:scale-125 transition"

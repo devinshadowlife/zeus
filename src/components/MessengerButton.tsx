@@ -118,14 +118,29 @@ export default function MessengerButton() {
             >
               &times;
             </button>
+
             <div className="flex flex-col items-center">
-              <img
-                 src={showQR.line ? "/images/lineQR.jpg" : "/images/wechat.jpg"}
-                alt={showQR.line ? "LINE QR Code" : "WeChat QR Code"}
-                width={280}
-                height={280}
-                className="rounded-lg border border-white"
-              />
+              {(() => {
+                const selectedQR = showQR.line
+                  ? "/images/lineQR.jpg"
+                  : "/images/wechat.jpg";
+                const basePath = selectedQR.replace(/\.(jpg|png)$/, "");
+
+                return (
+                  <picture>
+                    <source srcSet={`${basePath}.avif`} type="image/avif" />
+                    <source srcSet={`${basePath}.webp`} type="image/webp" />
+                    <img
+                      src={selectedQR}
+                      alt={showQR.line ? "LINE QR Code" : "WeChat QR Code"}
+                      width={280}
+                      height={280}
+                      className="rounded-lg border border-white"
+                    />
+                  </picture>
+                );
+              })()}
+
               <p className="mt-4 text-sm text-gray-300">@zeus_ekkamai</p>
             </div>
           </div>

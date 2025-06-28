@@ -8,7 +8,7 @@ export default function ContactCard() {
   const cardRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [showQR, setShowQR] = useState(false);
-  
+
   useEffect(() => {
     const card = cardRef.current; // Copy ref value
     if (card) {
@@ -115,16 +115,18 @@ export default function ContactCard() {
               &times;
             </button>
             <div className="flex flex-col items-center">
-              <img
-                src="/images/lineQR.jpg"
-                alt="LINE QR Code"
-                width={280}
-                height={280}
-                className="rounded-lg border border-white"
-              />
-              <p className="mt-4 text-sm text-gray-300">
-                @zeus_ekkamai
-              </p>
+              <picture>
+                <source srcSet="/images/lineQR.avif" type="image/avif" />
+                <source srcSet="/images/ineQR.webp" type="image/webp" />
+                <img
+                  src="/images/lineQR.jpg"
+                  alt="LINE QR Code"
+                  width={280}
+                  height={280}
+                  className="rounded-lg border border-white"
+                />
+              </picture>
+              <p className="mt-4 text-sm text-gray-300">@zeus_ekkamai</p>
             </div>
           </div>
         </div>

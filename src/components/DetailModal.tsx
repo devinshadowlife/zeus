@@ -62,13 +62,23 @@ export default function RoomSection() {
               }`}
               onClick={() => setSelectedImage(room.image)}
             >
-              <img
-                src={room.image}
-                alt={`Room ${index + 1}`}
-                width={500}
-                height={300}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
+              <picture>
+                <source
+                  srcSet={room.image.replace(".jpg", ".avif")}
+                  type="image/avif"
+                />
+                <source
+                  srcSet={room.image.replace(".jpg", ".webp")}
+                  type="image/webp"
+                />
+                <img
+                  src={room.image}
+                  alt={`Room ${index + 1}`}
+                  width={500}
+                  height={300}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </picture>
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300" />
             </div>
           ))}
@@ -85,13 +95,22 @@ export default function RoomSection() {
             className="relative w-[90vw] max-w-[1000px] aspect-video"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={selectedImage}
-              alt="Room fullscreen"
-              
-    className="absolute inset-0 w-full h-full object-cover rounded-xl"
-              sizes="(max-width: 768px) 90vw, 1000px"
-            />
+            <picture>
+              <source
+                srcSet={selectedImage.replace(/\.(jpg|png)$/, ".avif")}
+                type="image/avif"
+              />
+              <source
+                srcSet={selectedImage.replace(/\.(jpg|png)$/, ".webp")}
+                type="image/webp"
+              />
+              <img
+                src={selectedImage}
+                alt="Room fullscreen"
+                className="absolute inset-0 w-full h-full object-cover rounded-xl"
+                sizes="(max-width: 768px) 90vw, 1000px"
+              />
+            </picture>
           </div>
         </div>
       )}

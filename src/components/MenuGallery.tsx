@@ -84,22 +84,30 @@ export default function MenuGallery() {
 
       {/* 썸네일 2행 3열 */}
       <div className="grid grid-cols-3 gap-4 px-4 max-w-[600px] mx-auto">
-        {videoList.map((video, idx) => (
-          <a
-            key={idx}
-            href={video.link}
-            className="relative w-full aspect-[3/4] block group"
-          >
-            {/* Mobile에서는 대체 이미지 (예: number1.jpg, number2.jpg...) */}
-            <img
-              src={`/images/videoThumb${idx + 1}.png`}
-              alt={`Video ${idx + 1}`}
-              width={200}
-              height={270}
-              className="w-full h-full object-cover rounded-lg shadow hover:ring-2 hover:ring-amber-500 transition"
-            />
-          </a>
-        ))}
+        {videoList.map((video, idx) => {
+          const originalSrc = `/images/videoThumb${idx + 1}.png`;
+          const basePath = originalSrc.replace(/\.(png|jpg)$/, "");
+
+          return (
+            <a
+              key={idx}
+              href={video.link}
+              className="relative w-full aspect-[3/4] block group"
+            >
+              <picture>
+                <source srcSet={`${basePath}.avif`} type="image/avif" />
+                <source srcSet={`${basePath}.webp`} type="image/webp" />
+                <img
+                  src={originalSrc}
+                  alt={`Video ${idx + 1}`}
+                  width={200}
+                  height={270}
+                  className="w-full h-full object-cover rounded-lg shadow hover:ring-2 hover:ring-amber-500 transition"
+                />
+              </picture>
+            </a>
+          );
+        })}
       </div>
 
       {/* 텍스트 애니메이션 */}
