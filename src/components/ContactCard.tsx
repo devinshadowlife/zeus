@@ -44,7 +44,7 @@ export default function ContactCard() {
     {
       icon: <FaWhatsapp className="text-white w-6 h-6" />,
       bg: "bg-emerald-500",
-      href: "https://wa.me/+66612130971",
+      href: "https://wa.me/+66870848282",
       title: "WhatsApp",
     },
     {

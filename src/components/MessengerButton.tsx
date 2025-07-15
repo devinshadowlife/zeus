@@ -36,7 +36,7 @@ export default function MessengerButton() {
       bg: "bg-emerald-500",
       title: "WhatsApp",
       delay: "delay-200",
-      href: "https://wa.me/zeus_ekkamai", // 전화번호 형식 필요할 수 있음
+      href: "https://wa.me/+66870848282", // 전화번호 형식 필요할 수 있음
     },
     {
       icon: <SiKakaotalk className="text-black w-5 h-5" />,

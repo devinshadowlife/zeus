@@ -522,7 +522,7 @@ export default function HomeClient({ locale }: { locale: string }) {
                       href="tel:+66612130971"
                       className="text-amber-400 hover:underline font-medium"
                     >
-                      +66 61 213 0971
+                      +66 87 084 8282
                     </a>
                   </p>
                 </div>
