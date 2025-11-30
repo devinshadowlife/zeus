@@ -266,7 +266,7 @@ export default function HomeClient({ locale }: { locale: string }) {
               {t.promo.description}
             </p>
             <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-              {[1, 2, 3].map((num, index) => (
+              {[1, 2, 3].map((num) => (
                 <div
                   key={num}
                   className="relative aspect-[4/3] rounded-xl shadow-lg overflow-hidden group hover:scale-105 transition-transform duration-300 cursor-pointer"
