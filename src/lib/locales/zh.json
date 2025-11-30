@@ -9,8 +9,9 @@
 "menu": "尽情享用韩餐、中餐、日料与泰国美食 — 一次满足多种味蕾。",
 "liquorPromo": "精心甄选的高端酒水，以<span class=\"font-semibold text-amber-600\">合理的价格</span>呈现。尊享私密的 KTV 空间，度过难忘的夜晚。",
   "roomSizes": "多种房型尺寸",
-  "beTheBest": "现在，轮到您闪耀登场了。"
-
-
-
+  "beTheBest": "现在，轮到您闪耀登场了。",
+  "promo.subtitle": "限时优惠",
+  "promo.title": "立即查看",
+  "promo.description": "错过会后悔的特别促销正在进行中",
+  "promo.clickToView": "点击查看详情"
 }

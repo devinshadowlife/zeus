@@ -29,6 +29,12 @@ interface Translation {
   liquorPromo: string;
   roomSizes: string;
   beTheBest: string;
+  promo: {
+    subtitle: string;
+    title: string;
+    description: string;
+    clickToView: string;
+  };
 }
 
 const translations: Record<string, Translation> = {
@@ -38,12 +44,24 @@ const translations: Record<string, Translation> = {
       prefix: en["luxury.prefix"],
       suffix: en["luxury.suffix"],
     },
+    promo: {
+      subtitle: (en as Record<string, string>)["promo.subtitle"],
+      title: (en as Record<string, string>)["promo.title"],
+      description: (en as Record<string, string>)["promo.description"],
+      clickToView: (en as Record<string, string>)["promo.clickToView"],
+    },
   },
   ko: {
     ...ko,
     luxury: {
       prefix: ko["luxury.prefix"],
       suffix: ko["luxury.suffix"],
+    },
+    promo: {
+      subtitle: (ko as Record<string, string>)["promo.subtitle"],
+      title: (ko as Record<string, string>)["promo.title"],
+      description: (ko as Record<string, string>)["promo.description"],
+      clickToView: (ko as Record<string, string>)["promo.clickToView"],
     },
   },
   zh: {
@@ -52,12 +70,24 @@ const translations: Record<string, Translation> = {
       prefix: zh["luxury.prefix"],
       suffix: zh["luxury.suffix"],
     },
+    promo: {
+      subtitle: (zh as Record<string, string>)["promo.subtitle"],
+      title: (zh as Record<string, string>)["promo.title"],
+      description: (zh as Record<string, string>)["promo.description"],
+      clickToView: (zh as Record<string, string>)["promo.clickToView"],
+    },
   },
   th: {
     ...th,
     luxury: {
       prefix: th["luxury.prefix"],
       suffix: th["luxury.suffix"],
+    },
+    promo: {
+      subtitle: (th as Record<string, string>)["promo.subtitle"],
+      title: (th as Record<string, string>)["promo.title"],
+      description: (th as Record<string, string>)["promo.description"],
+      clickToView: (th as Record<string, string>)["promo.clickToView"],
     },
   },
 };
@@ -66,6 +96,7 @@ export default function HomeClient({ locale }: { locale: string }) {
   const [fadeOpacity, setFadeOpacity] = useState(1);
   const [aboutVisible, setAboutVisible] = useState(false);
   const [visitVisible, setVisitVisible] = useState(false);
+  const [selectedPromo, setSelectedPromo] = useState<string | null>(null);
   const visitRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
@@ -223,6 +254,99 @@ export default function HomeClient({ locale }: { locale: string }) {
       >
         <div className="absolute -top-32 left-0 w-full h-32 bg-gradient-to-t from-[#000011] to-transparent z-10" />
         <div className="relative z-20 pt-20">
+          {/* Promotion Section */}
+          <div className="flex flex-col items-center py-12 sm:py-16 px-4 mb-8">
+            <p className="text-xs sm:text-sm uppercase tracking-widest text-amber-400 mb-2 font-cinzel">
+              {t.promo.subtitle}
+            </p>
+            <h2 className="font-cinzel text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 text-center">
+              {t.promo.title}
+            </h2>
+            <p className="font-lora text-sm sm:text-base text-gray-300 mb-6 sm:mb-8 text-center max-w-2xl px-4">
+              {t.promo.description}
+            </p>
+            <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+              {[1, 2, 3].map((num, index) => (
+                <div
+                  key={num}
+                  className="relative aspect-[4/3] rounded-xl shadow-lg overflow-hidden group hover:scale-105 transition-transform duration-300 cursor-pointer"
+                  onClick={() => setSelectedPromo(`/images/promo_${num}.jpg`)}
+                >
+                  <picture>
+                    <source
+                      srcSet={`/images/promo_${num}.avif`}
+                      type="image/avif"
+                    />
+                    <source
+                      srcSet={`/images/promo_${num}.webp`}
+                      type="image/webp"
+                    />
+                    <img
+                      src={`/images/promo_${num}.jpg`}
+                      alt={`Promotion ${num}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </picture>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/80 to-transparent">
+                    <p className="text-white text-xs sm:text-sm font-lora text-center">
+                      {t.promo.clickToView}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Promotion Modal */}
+          {selectedPromo && (
+            <div
+              className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+              onClick={() => setSelectedPromo(null)}
+            >
+              <div
+                className="relative w-full max-w-5xl aspect-video"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <picture>
+                  <source
+                    srcSet={selectedPromo.replace(/\.(jpg|png)$/, ".avif")}
+                    type="image/avif"
+                  />
+                  <source
+                    srcSet={selectedPromo.replace(/\.(jpg|png)$/, ".webp")}
+                    type="image/webp"
+                  />
+                  <img
+                    src={selectedPromo}
+                    alt="Promotion fullscreen"
+                    className="absolute inset-0 w-full h-full object-contain rounded-xl"
+                    sizes="(max-width: 768px) 100vw, 1280px"
+                  />
+                </picture>
+                <button
+                  onClick={() => setSelectedPromo(null)}
+                  className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors duration-200"
+                  aria-label="Close modal"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          )}
+
           <div
             id="about"
             ref={aboutRef}

@@ -9,6 +9,9 @@
   "menu": "Korean, Chinese, Japanese and Thai food",
   "liquorPromo": "Discover an exquisite range of premium liquors, thoughtfully offered at <span class=\"font-semibold text-amber-600\">fair and accessible prices</span>. Let our elegant KTV setting elevate your night to something truly memorable.",
   "roomSizes": "various room sizes",
-
-  "beTheBest": "It's time for you to be the best."
+  "beTheBest": "It's time for you to be the best.",
+  "promo.subtitle": "Limited Time Offer",
+  "promo.title": "Check It Out Now",
+  "promo.description": "Don't miss out on our special promotion that you'll regret missing",
+  "promo.clickToView": "Click to view details"
 }

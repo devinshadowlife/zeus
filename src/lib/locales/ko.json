@@ -11,8 +11,9 @@
 "menu": "한식, 중식, 일식, 태국식까지 — 다양한 세계 요리를 맛있게 즐겨보세요.",
   "liquorPromo": "정성스럽게 엄선한 프리미엄 주류를 <span class=\"font-semibold text-amber-600\">합리적인 가격</span>에 만나보세요. 프라이빗한 KTV 공간에서 잊지 못할 밤을 경험해보세요.",
   "roomSizes": "다양한 룸 사이즈",
-  "beTheBest": "이제 당신이 주인공이 될 시간입니다."
-
-
-
+  "beTheBest": "이제 당신이 주인공이 될 시간입니다.",
+  "promo.subtitle": "한정 특가",
+  "promo.title": "지금 확인하세요",
+  "promo.description": "놓치면 후회할 특별한 프로모션이 진행 중입니다",
+  "promo.clickToView": "클릭하여 자세히 보기"
 }
