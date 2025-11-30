@@ -11,8 +11,7 @@ import { SiKakaotalk, SiWechat } from "react-icons/si";
 
 export default function MessengerButton() {
   const [open, setOpen] = useState(false);
-  const [showQR, setShowQR] = useState<{ line: boolean; wechat: boolean }>({
-    line: false,
+  const [showQR, setShowQR] = useState<{ wechat: boolean }>({
     wechat: false,
   });
 
@@ -22,14 +21,14 @@ export default function MessengerButton() {
       bg: "bg-green-500",
       title: "LINE",
       delay: "delay-100",
-      onclick: () => setShowQR({ line: true, wechat: false }),
+      href: "https://line.me/R/ti/p/@598setbm",
     },
     {
       icon: <SiWechat className="text-white w-5 h-5" />,
       bg: "bg-green-600",
       title: "WeChat",
       delay: "delay-150",
-      onclick: () => setShowQR({ line: false, wechat: true }),
+      onclick: () => setShowQR({ wechat: true }),
     },
     {
       icon: <FaWhatsapp className="text-white w-5 h-5" />,
@@ -71,7 +70,7 @@ export default function MessengerButton() {
               }
             `;
 
-            // LINE만 onClick으로 처리
+            // WeChat만 onClick으로 처리 (QR 모달)
             if (btn.onclick) {
               return (
                 <button
@@ -108,38 +107,29 @@ export default function MessengerButton() {
         </button>
       </div>
 
-      {/* LINE QR Modal (dark and elegant) */}
-      {(showQR.line || showQR.wechat) && (
+      {/* WeChat QR Modal (dark and elegant) */}
+      {showQR.wechat && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-50">
           <div className="bg-zinc-900 text-white rounded-xl p-6 shadow-2xl relative w-[90%] max-w-md">
             <button
-              onClick={() => setShowQR({ line: false, wechat: false })}
+              onClick={() => setShowQR({ wechat: false })}
               className="absolute top-3 right-4 text-gray-300 hover:text-white text-2xl"
             >
               &times;
             </button>
 
             <div className="flex flex-col items-center">
-              {(() => {
-                const selectedQR = showQR.line
-                  ? "/images/lineQR.jpg"
-                  : "/images/wechat.jpg";
-                const basePath = selectedQR.replace(/\.(jpg|png)$/, "");
-
-                return (
-                  <picture>
-                    <source srcSet={`${basePath}.avif`} type="image/avif" />
-                    <source srcSet={`${basePath}.webp`} type="image/webp" />
-                    <img
-                      src={selectedQR}
-                      alt={showQR.line ? "LINE QR Code" : "WeChat QR Code"}
-                      width={280}
-                      height={280}
-                      className="rounded-lg border border-white"
-                    />
-                  </picture>
-                );
-              })()}
+              <picture>
+                <source srcSet="/images/wechat.avif" type="image/avif" />
+                <source srcSet="/images/wechat.webp" type="image/webp" />
+                <img
+                  src="/images/wechat.jpg"
+                  alt="WeChat QR Code"
+                  width={280}
+                  height={280}
+                  className="rounded-lg border border-white"
+                />
+              </picture>
 
               <p className="mt-4 text-sm text-gray-300">@zeus_ekkamai</p>
             </div>

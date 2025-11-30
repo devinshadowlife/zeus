@@ -7,7 +7,6 @@ import { SiKakaotalk, SiWechat } from "react-icons/si";
 export default function ContactCard() {
   const cardRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  const [showQR, setShowQR] = useState(false);
 
   useEffect(() => {
     const card = cardRef.current; // Copy ref value
@@ -32,7 +31,7 @@ export default function ContactCard() {
     {
       icon: <FaLine className="text-white w-6 h-6" />,
       bg: "bg-green-500",
-      onClick: () => setShowQR(true),
+      href: "https://line.me/R/ti/p/@598setbm",
       title: "LINE",
     },
     {
@@ -78,16 +77,7 @@ export default function ContactCard() {
             {buttons.map((btn, idx) => {
               const commonStyle = `${btn.bg} w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:scale-110 transform transition shrink-0`;
 
-              return btn.onClick ? (
-                <button
-                  key={idx}
-                  onClick={btn.onClick}
-                  title={btn.title}
-                  className={commonStyle}
-                >
-                  {btn.icon}
-                </button>
-              ) : (
+              return (
                 <a
                   key={idx}
                   href={btn.href}
@@ -103,34 +93,6 @@ export default function ContactCard() {
           </div>
         </div>
       </div>
-
-      {/* LINE QR 모달 */}
-      {showQR && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-50">
-          <div className="bg-zinc-900 text-white rounded-xl p-6 shadow-2xl relative w-[90%] max-w-md">
-            <button
-              onClick={() => setShowQR(false)}
-              className="absolute top-3 right-4 text-gray-300 hover:text-white text-2xl"
-            >
-              &times;
-            </button>
-            <div className="flex flex-col items-center">
-              <picture>
-                <source srcSet="/images/lineQR.avif" type="image/avif" />
-                <source srcSet="/images/ineQR.webp" type="image/webp" />
-                <img
-                  src="/images/lineQR.jpg"
-                  alt="LINE QR Code"
-                  width={280}
-                  height={280}
-                  className="rounded-lg border border-white"
-                />
-              </picture>
-              <p className="mt-4 text-sm text-gray-300">@zeus_ekkamai</p>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
